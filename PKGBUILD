@@ -4,7 +4,7 @@
 pkgname=sequoia-sq
 pkgver=0.30.0
 _commit=2f3f75e8c2117ae2ff118219dc7a118eb8f52b0b  # refs/tags/v0.30.0
-pkgrel=2
+pkgrel=3
 pkgdesc='Command-line frontends for Sequoia'
 url='https://sequoia-pgp.org/'
 arch=('x86_64')
@@ -36,6 +36,9 @@ validpgpkeys=(
 
 prepare() {
   cd $pkgname
+
+  # update sequoia-openpgp and buffered-reader: https://gitlab.com/sequoia-pgp/sequoia-sq/-/merge_requests/25
+  git cherry-pick -n cd8ef12ef413d9dd3beefb1102b86aa323513ba8 58ee3380565879a05f20882107d580bfadcf3b4a
   export RUSTUP_TOOLCHAIN=stable
   cargo fetch --locked --target "$CARCH-unknown-linux-gnu"
 }
