@@ -36,9 +36,6 @@ validpgpkeys=(
 
 prepare() {
   cd $pkgname
-
-  # update sequoia-openpgp and buffered-reader: https://gitlab.com/sequoia-pgp/sequoia-sq/-/merge_requests/25
-  git cherry-pick -n cd8ef12ef413d9dd3beefb1102b86aa323513ba8 58ee3380565879a05f20882107d580bfadcf3b4a
   export RUSTUP_TOOLCHAIN=stable
   cargo fetch --locked --target "$CARCH-unknown-linux-gnu"
 }
