@@ -2,9 +2,9 @@
 # Maintainer: David Runge <dvzrv@archlinux.org>
 
 pkgname=sequoia-sq
-pkgver=0.30.0
-_commit=2f3f75e8c2117ae2ff118219dc7a118eb8f52b0b  # refs/tags/v0.30.0
-pkgrel=3
+pkgver=0.30.1
+_commit=c0f664886db5f8219efca9ed343a47e8ac57afe7  # refs/tags/v0.30.1
+pkgrel=1
 pkgdesc='Command-line frontends for Sequoia'
 url='https://sequoia-pgp.org/'
 arch=('x86_64')
