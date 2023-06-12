@@ -4,7 +4,7 @@
 pkgname=sequoia-sq
 pkgver=0.30.1
 _commit=c0f664886db5f8219efca9ed343a47e8ac57afe7  # refs/tags/v0.30.1
-pkgrel=1
+pkgrel=2
 pkgdesc='Command-line frontends for Sequoia'
 url='https://sequoia-pgp.org/'
 arch=('x86_64')
@@ -46,6 +46,8 @@ build() {
   export RUSTUP_TOOLCHAIN=stable
   # NOTE: we select specific (default) features, as there are multiple crypto backends
   cargo build --release --frozen --features 'default'
+  # create the man pages
+  SQ_MAN=$CARGO_TARGET_DIR/manpages cargo run
 
 }
 
@@ -64,10 +66,7 @@ package() {
   install -Dm 644 target/sq.bash "${pkgdir}/usr/share/bash-completion/completions/sq"
   install -Dm 644 target/_sq -t "${pkgdir}/usr/share/zsh/site-functions"
   install -Dm 644 target/sq.fish -t "${pkgdir}/usr/share/fish/vendor_completions.d"
-
-  for manpage in target/release/build/$pkgname-*/out/*.1; do
-    install -Dm 644 $manpage -t "${pkgdir}/usr/share/man/man1/"
-  done
+  install -vDm 644 target/manpages/*.1 -t "${pkgdir}/usr/share/man/man1/"
 }
 
 # vim: ts=2 sw=2 et:
