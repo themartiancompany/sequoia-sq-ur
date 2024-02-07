@@ -2,13 +2,13 @@
 # Maintainer: David Runge <dvzrv@archlinux.org>
 
 pkgname=sequoia-sq
-pkgver=0.32.0
-_commit=f04eb709c5ba2b4a4474e5aa8b5da29baead0042  # refs/tags/v0.32.0^{}
+pkgver=0.33.0
+_commit=195ef2bf9b218ff4d6f25b1854f9f4558f449672  # refs/tags/v0.33.0^{}
 pkgrel=1
 pkgdesc='Command-line frontends for Sequoia'
 url='https://sequoia-pgp.org/'
 arch=('x86_64')
-license=('GPL2')
+license=('LGPL-2.0-or-later')
 groups=('sequoia')
 replaces=('sequoia')
 depends=(
@@ -43,11 +43,9 @@ build() {
   cd $pkgname
   export CARGO_TARGET_DIR=../target
   export RUSTUP_TOOLCHAIN=stable
+  export ASSET_OUT_DIR=../target
   # NOTE: we select specific (default) features, as there are multiple crypto backends
   cargo build --release --frozen --features 'default'
-  # create the man pages
-  SQ_MAN=$CARGO_TARGET_DIR/manpages cargo run
-
 }
 
 check() {
@@ -60,12 +58,12 @@ check() {
 }
 
 package() {
-  install -Dm 755 target/release/sq -t "${pkgdir}/usr/bin"
+  install -vDm 755 target/release/sq -t "${pkgdir}/usr/bin"
 
-  install -Dm 644 target/sq.bash "${pkgdir}/usr/share/bash-completion/completions/sq"
-  install -Dm 644 target/_sq -t "${pkgdir}/usr/share/zsh/site-functions"
-  install -Dm 644 target/sq.fish -t "${pkgdir}/usr/share/fish/vendor_completions.d"
-  install -vDm 644 target/manpages/*.1 -t "${pkgdir}/usr/share/man/man1/"
+  install -vDm 644 target/shell-completions/sq.bash "${pkgdir}/usr/share/bash-completion/completions/sq"
+  install -vDm 644 target/shell-completions/_sq -t "${pkgdir}/usr/share/zsh/site-functions"
+  install -vDm 644 target/shell-completions/sq.fish -t "${pkgdir}/usr/share/fish/vendor_completions.d"
+  install -vDm 644 target/man-pages/*.1 -t "${pkgdir}/usr/share/man/man1/"
 }
 
 # vim: ts=2 sw=2 et:
