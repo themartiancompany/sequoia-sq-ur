@@ -2,8 +2,8 @@
 # Maintainer: David Runge <dvzrv@archlinux.org>
 
 pkgname=sequoia-sq
-pkgver=0.33.0
-_commit=195ef2bf9b218ff4d6f25b1854f9f4558f449672  # refs/tags/v0.33.0^{}
+pkgver=0.34.0
+_commit=1dd63bece8dea0072f736d5b2db5dd92320d4ef1  # refs/tags/v0.34.0
 pkgrel=1
 pkgdesc='Command-line frontends for Sequoia'
 url='https://sequoia-pgp.org/'
@@ -21,17 +21,23 @@ depends=(
   'sqlite'
 )
 makedepends=(
-  'git'
+  'capnproto'
   'cargo'
   'clang'
+  'git'
 )
 options=('!lto')
-source=("git+https://gitlab.com/sequoia-pgp/sequoia-sq.git#commit=$_commit?signed")
+source=("git+https://gitlab.com/sequoia-pgp/sequoia-sq.git#tag=$_commit?signed")
 sha512sums=('SKIP')
 validpgpkeys=(
   D2F2C5D45BE9FDE6A4EE0AAF31855247603831FD  # Justus Winter (Code Signing Key) <justus@sequoia-pgp.org>
   8F17777118A33DDA9BA48E62AACB3243630052D9  # Neal H. Walfield <neal@sequoia-pgp.org>
 )
+
+pkgver() {
+  cd $pkgname
+  git describe --tags | sed 's/\([^-]*-g\)/r\1/;s/-/./g;s/v//g'
+}
 
 prepare() {
   cd $pkgname
