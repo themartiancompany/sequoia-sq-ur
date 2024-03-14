@@ -5,12 +5,16 @@
 # Maintainer: Levente Polyak <anthraxx[at]archlinux[dot]org>
 # Maintainer: David Runge <dvzrv@archlinux.org>
 
-pkgname=sequoia-sq
+_os="$( \
+  uname \
+    -o)"
+_pkg='sequoia'
+pkgname="${_pkg}-sq"
 pkgver=0.34.0
 _commit=1dd63bece8dea0072f736d5b2db5dd92320d4ef1  # refs/tags/v0.34.0
 pkgrel=1
 pkgdesc='Command-line frontends for Sequoia'
-url='https://sequoia-pgp.org/'
+url="https://${_pkg}sequoia-pgp.org"
 arch=(
   'x86_64'
   'arm'
@@ -19,10 +23,10 @@ license=(
   'LGPL-2.0-or-later'
 )
 groups=(
-  'sequoia'
+  "${_pkg}"
 )
 replaces=(
-  'sequoia'
+  "${_pkg}"
 )
 depends=(
   'bzip2' 'libbz2.so'
@@ -43,7 +47,7 @@ options=(
   '!lto'
 )
 source=(
-  "git+https://gitlab.com/sequoia-pgp/${pkgname}.git#tag=${_commit}?signed"
+  "git+https://gitlab.com/${_pkg}-pgp/${pkgname}.git#tag=${_commit}?signed"
 )
 sha512sums=(
   'SKIP'
@@ -66,19 +70,25 @@ pkgver() {
 }
 
 prepare() {
+  local \
+    _target
+  _target="${CARCH}-unknown-linux-gnu"
   cd \
     "${pkgname}"
   export \
-    RUSTUP_TOOLCHAIN=stable
+    RUSTUP_TOOLCHAIN=stable 
+  [[ "${_os}" == "Android" ]] && \
+    _target="${CARCH}-linux-androideabi"
   cargo \
     fetch \
       --locked \
       --target \
-        "${CARCH}-unknown-linux-gnu"
+        "${_target}"
 }
 
 build() {
-  cd $pkgname
+  cd \
+    "${pkgname}"
   export \
     CARGO_TARGET_DIR=../target \
     RUSTUP_TOOLCHAIN=stable \
