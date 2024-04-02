@@ -14,10 +14,12 @@ pkgver=0.34.0
 _commit=1dd63bece8dea0072f736d5b2db5dd92320d4ef1  # refs/tags/v0.34.0
 pkgrel=1
 pkgdesc='Command-line frontends for Sequoia'
-url="https://${_pkg}sequoia-pgp.org"
+url="https://${_pkg}-pgp.org"
 arch=(
   'x86_64'
   'arm'
+  'aarch64'
+  'i686'
 )
 license=(
   'LGPL-2.0-or-later'
@@ -46,8 +48,11 @@ makedepends=(
 options=(
   '!lto'
 )
+_http="https://gitlab.com"
+_ns="${_pkg}-pgp"
+_url="${_http}/${_ns}/${_pkg}"
 source=(
-  "git+https://gitlab.com/${_pkg}-pgp/${pkgname}.git#tag=${_commit}?signed"
+  "git+${_url}.git#tag=${_commit}?signed"
 )
 sha512sums=(
   'SKIP'
@@ -105,8 +110,10 @@ build() {
 }
 
 check() {
-  cd "${pkgname}"
-  # NOTE: we use a different target dir, as otherwise cargo test --release alters the sq binary
+  cd \
+    "${pkgname}"
+  # NOTE: we use a different target dir,
+  # as otherwise cargo test --release alters the sq binary
   # https://gitlab.com/sequoia-pgp/sequoia-sq/-/issues/96
   export \
     CARGO_TARGET_DIR=../target-test \
@@ -120,8 +127,11 @@ check() {
 }
 
 package() {
-  install -vDm 755 target/release/sq -t "${pkgdir}/usr/bin"
-
+  install \
+    -vDm755 \
+    target/release/sq \
+    -t \
+    "${pkgdir}/usr/bin"
   install \
     -vDm \
     644 \
