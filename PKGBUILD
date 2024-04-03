@@ -54,6 +54,7 @@ options=(
 _http="https://gitlab.com"
 _ns="${_pkg}-pgp"
 _url="${_http}/${_ns}/${_pkg}"
+_tarname="${_pkg}-${_module}-v${pkgver}"
 [[ "${_offline}" == "true" ]] && \
   url="file://${HOME}/${pkgname}"
 [[ "${_git}" == true ]] && \
@@ -61,7 +62,7 @@ _url="${_http}/${_ns}/${_pkg}"
     "git"
   ) && \
   source+=(
-    "${_pkg}-${_module}-${pkgver}::git+${_url}#tag=${pkgver}"
+    "${_tarname}::git+${_url}#tag=${pkgver}"
   ) && \
   sha256sums+=(
     SKIP
@@ -69,9 +70,9 @@ _url="${_http}/${_ns}/${_pkg}"
 [[ "${_git}" == false ]] && \
   source+=(
     # Gitlab
-    "${_pkg}-${_module}-${pkgver}.tar.gz::${_url}/-/archive/${_module}/v${pkgver}/${_pkg}-${_module}-v${pkgver}.tar.gz"
+    "${_tarname}.tar.gz::${_url}/-/archive/${_module}/v${pkgver}/${_tarname}.tar.gz"
     # Github
-    # "${pkgname}-${pkgver}.tar.gz::${_url}/archive/refs/tags/${pkgver}.tar.gz"
+    # "${_tarname}.tar.gz::${_url}/archive/refs/tags/${pkgver}.tar.gz"
   ) && \
   sha256sums+=(
     '5fe7d9402532ebfcbec3cb3999d083105338a0afc52456fa4ee4032403fc762b'
@@ -86,7 +87,7 @@ validpgpkeys=(
 [[ "${_git}" == true ]] && \
   pkgver() {
     cd \
-      "${_pkg}-${_module}-${pkgver}"
+      "${_tarname}"
     git \
       describe \
         --tags | \
@@ -98,8 +99,9 @@ prepare() {
   local \
     _target
   _target="${CARCH}-unknown-linux-gnu"
+  ls
   cd \
-    "${_pkg}-${_module}-${pkgver}"
+    "${_tarname}"
   export \
     RUSTUP_TOOLCHAIN=stable 
   [[ "${_os}" == "Android" ]] && \
@@ -113,7 +115,7 @@ prepare() {
 
 build() {
   cd \
-    "${_pkg}-${_module}-${pkgver}"
+    "${_tarname}"
   export \
     CARGO_TARGET_DIR=../target \
     RUSTUP_TOOLCHAIN=stable \
@@ -131,7 +133,7 @@ build() {
 
 check() {
   cd \
-    "${_pkg}-${_module}-${pkgver}"
+    "${_tarname}"
   # NOTE: we use a different target dir,
   # as otherwise cargo test --release alters the sq binary
   # https://gitlab.com/sequoia-pgp/sequoia-sq/-/issues/96
