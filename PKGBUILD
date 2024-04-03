@@ -149,29 +149,51 @@ check() {
 }
 
 package() {
-  install \
-    -vDm755 \
-    "$( \
-      find 
+  local \
+    _sq=() \
+    _res
+  _sq=(
+    $(find 
         "${srcdir}" | \
         grep \
-          "target/release/sq"
-      )" \
+          "target/release/sq")
+  )
+  echo \
+    "Results for 'target/release/sq':"
+  for _res \
+    in "${_sq[@]}"; do
+    echo \
+      "${_res}"
+  done
+  for _res \
+    in "${_sq[@]}"; do
+    if \
+      [ ! -d "${_res}" ] && \
+      [[ "$(basename \
+              "${_res}")" == "sq" ]]; then
+      break
+    fi
+  done
+  echo \
+    "selected result:"
+  echo \
+    "${_res}"
+  install \
+    -vDm755 \
+    "${_res}" \
     -t \
     "${pkgdir}/usr/bin"
   install \
-    -vDm \
-    644 \
+    -vDm644 \
     "$( \
       find \
         "${srcdir}" | \
         grep \
-          "target/shell-completions/sq.bash" \
+          "target/shell-completions/vsq.bash" \
       )" \
     "${pkgdir}/usr/share/bash-completion/completions/sq"
   install \
-    -vDm \
-    644 \
+    -vDm644 \
     "$( \
       find \
         "${srcdir}" | \
@@ -181,8 +203,7 @@ package() {
     -t \
     "${pkgdir}/usr/share/zsh/site-functions"
   install \
-    -vDm \
-    644 \
+    -vDm644 \
     "$( \
       find \
         "${srcdir}" | \
@@ -192,8 +213,7 @@ package() {
     -t \
     "${pkgdir}/usr/share/fish/vendor_completions.d"
   install \
-    -vDm \
-    644 \
+    -vDm644 \
     "$( \
       find \
         "${srcdir}" | \
