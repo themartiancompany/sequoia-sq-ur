@@ -151,30 +151,55 @@ check() {
 package() {
   install \
     -vDm755 \
-    target/release/sq \
+    "$( \
+      find 
+        "${srcdir}" | \
+        grep \
+          "target/release/sq"
+      )" \
     -t \
     "${pkgdir}/usr/bin"
   install \
     -vDm \
     644 \
-    target/shell-completions/sq.bash \
+    "$( \
+      find \
+        "${srcdir}" | \
+        grep \
+          "target/shell-completions/sq.bash" \
+      )" \
     "${pkgdir}/usr/share/bash-completion/completions/sq"
   install \
     -vDm \
     644 \
-    target/shell-completions/_sq \
+    "$( \
+      find \
+        "${srcdir}" | \
+        grep \
+          "target/shell-completions/_sq" \
+      )" \
     -t \
     "${pkgdir}/usr/share/zsh/site-functions"
   install \
     -vDm \
     644 \
-    target/shell-completions/sq.fish \
+    "$( \
+      find \
+        "${srcdir}" | \
+        grep \
+          "target/shell-completions/sq.fish" \
+      )" \
     -t \
     "${pkgdir}/usr/share/fish/vendor_completions.d"
   install \
     -vDm \
     644 \
-    target/man-pages/*.1 \
+    "$( \
+      find \
+        "${srcdir}" | \
+        grep \
+          "target/man-pages/" \
+      )"*.1 \
     -t \
     "${pkgdir}/usr/share/man/man1"
 }
