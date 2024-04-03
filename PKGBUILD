@@ -153,7 +153,7 @@ package() {
     _sq=() \
     _res
   _sq=(
-    $(find 
+    $(find \
         "${srcdir}" | \
         grep \
           "target/release/sq")
