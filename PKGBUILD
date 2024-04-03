@@ -5,10 +5,13 @@
 # Maintainer: Levente Polyak <anthraxx[at]archlinux[dot]org>
 # Maintainer: David Runge <dvzrv@archlinux.org>
 
+_git="false"
+_offline="false"
 _os="$( \
   uname \
     -o)"
 _pkg='sequoia'
+_module="ipc"
 pkgname="${_pkg}-sq"
 pkgver=0.34.0
 _commit=1dd63bece8dea0072f736d5b2db5dd92320d4ef1  # refs/tags/v0.34.0
@@ -51,12 +54,28 @@ options=(
 _http="https://gitlab.com"
 _ns="${_pkg}-pgp"
 _url="${_http}/${_ns}/${_pkg}"
-source=(
-  "git+${_url}.git#tag=${_commit}?signed"
-)
-sha512sums=(
-  'SKIP'
-)
+[[ "${_offline}" == "true" ]] && \
+  url="file://${HOME}/${pkgname}"
+[[ "${_git}" == true ]] && \
+  makedepends+=(
+    "git"
+  ) && \
+  source+=(
+    "${_pkg}-${_module}-${pkgver}::git+${_url}#tag=${pkgver}"
+  ) && \
+  sha256sums+=(
+    SKIP
+  )
+[[ "${_git}" == false ]] && \
+  source+=(
+    # Gitlab
+    "${_pkg}-${_module}-${pkgver}.tar.gz::${_url}/-/archive/${_module}/v${pkgver}/${_pkg}-${_module}-v${pkgver}.tar.gz"
+    # Github
+    # "${pkgname}-${pkgver}.tar.gz::${_url}/archive/refs/tags/${pkgver}.tar.gz"
+  ) && \
+  sha256sums+=(
+    '5fe7d9402532ebfcbec3cb3999d083105338a0afc52456fa4ee4032403fc762b'
+  )
 validpgpkeys=(
   D2F2C5D45BE9FDE6A4EE0AAF31855247603831FD 
   # Justus Winter (Code Signing Key) <justus@sequoia-pgp.org>
@@ -64,22 +83,23 @@ validpgpkeys=(
   # Neal H. Walfield <neal@sequoia-pgp.org>
 )
 
-pkgver() {
-  cd \
-    "${pkgname}"
-  git \
-    describe \
-      --tags | \
-    sed \
-      's/\([^-]*-g\)/r\1/;s/-/./g;s/v//g'
-}
+[[ "${_git}" == true ]] && \
+  pkgver() {
+    cd \
+      "${_pkg}-${_module}-${pkgver}"
+    git \
+      describe \
+        --tags | \
+      sed \
+        's/\([^-]*-g\)/r\1/;s/-/./g;s/v//g'
+  }
 
 prepare() {
   local \
     _target
   _target="${CARCH}-unknown-linux-gnu"
   cd \
-    "${pkgname}"
+    "${_pkg}-${_module}-${pkgver}"
   export \
     RUSTUP_TOOLCHAIN=stable 
   [[ "${_os}" == "Android" ]] && \
@@ -93,7 +113,7 @@ prepare() {
 
 build() {
   cd \
-    "${pkgname}"
+    "${_pkg}-${_module}-${pkgver}"
   export \
     CARGO_TARGET_DIR=../target \
     RUSTUP_TOOLCHAIN=stable \
@@ -111,7 +131,7 @@ build() {
 
 check() {
   cd \
-    "${pkgname}"
+    "${_pkg}-${_module}-${pkgver}"
   # NOTE: we use a different target dir,
   # as otherwise cargo test --release alters the sq binary
   # https://gitlab.com/sequoia-pgp/sequoia-sq/-/issues/96
