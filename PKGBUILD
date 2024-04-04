@@ -158,10 +158,16 @@ package() {
         grep \
           "target/release/sq")
   )
+  _release=(
+    $(find \
+        "${srcdir}" | \
+        grep \
+          "target/release/")
+  )
   echo \
-    "Results for 'target/release/sq':"
+    "Results for 'target/release/':"
   for _res \
-    in "${_sq[@]}"; do
+    in "${_release[@]}"; do
     echo \
       "${_res}"
   done
