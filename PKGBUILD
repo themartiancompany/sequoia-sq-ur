@@ -120,9 +120,9 @@ build() {
   _cargo_opts=(
     --release
     --frozen
-    --features
-      'default'
-    --all
+    # --features
+    #   'default'
+    # --all
   )
   cd \
     "${_tarname}"
@@ -135,7 +135,13 @@ build() {
   #   as there are multiple crypto backends
   cargo \
     build \
-      "${_cargo_opts[@]}"
+      "${_cargo_opts[@]}" \
+      --all
+  cargo \
+    build \
+      "${_cargo_opts[@]}" \
+      -p \
+        "${pkgname}"
 }
 
 check() {
