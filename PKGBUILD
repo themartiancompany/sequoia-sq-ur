@@ -76,7 +76,8 @@ _tarname="${_pkg}-${_module}-v${pkgver}"
     # "${_tarname}.tar.gz::${_url}/archive/refs/tags/${pkgver}.tar.gz"
   ) && \
   sha256sums+=(
-    '5fe7d9402532ebfcbec3cb3999d083105338a0afc52456fa4ee4032403fc762b'
+
+    'ef28a21f6d240eb76c2b03699054b6d55a34a9b01746a2da33864cc60e4371f6'
   )
 validpgpkeys=(
   D2F2C5D45BE9FDE6A4EE0AAF31855247603831FD 
