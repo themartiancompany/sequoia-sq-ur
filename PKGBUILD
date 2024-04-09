@@ -13,8 +13,9 @@ _os="$( \
 _pkg='sequoia'
 _module="ipc"
 pkgname="${_pkg}-sq"
-pkgver=0.34.0
-_commit=1dd63bece8dea0072f736d5b2db5dd92320d4ef1  # refs/tags/v0.34.0
+pkgver=0.34.1
+_commit=fd270aeedfffc7d03f8bd61bcf0842a831ec7ded 
+# refs/tags/v0.34.1
 pkgrel=1
 pkgdesc='Command-line frontends for Sequoia'
 url="https://${_pkg}-pgp.org"
@@ -118,9 +119,9 @@ build() {
   _cargo_opts=(
     --release
     --frozen
+    --features
+      'default'
     --all
-    # --features
-    #   'default'
   )
   cd \
     "${_tarname}"
@@ -179,9 +180,6 @@ package() {
     target/man-pages/*.1 \
     -t \
     "${pkgdir}/usr/share/man/man1/"
-}
-
-
 }
 
 # vim:set sw=2 sts=-1 et:
