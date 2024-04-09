@@ -99,7 +99,6 @@ prepare() {
   local \
     _target
   _target="${CARCH}-unknown-linux-gnu"
-  ls
   cd \
     "${_tarname}"
   export \
@@ -156,93 +155,33 @@ check() {
 }
 
 package() {
-  find \
-    "${srcdir}" > \
-    "${srcdir}/src_files"
-  cat \
-    "${srcdir}/src_files" | \
-    grep \
-      "target/release/sq" || \
-  true
-  # local \
-  #   _sq=() \
-  #   _release=() \
-  #   _res
-  # _sq=(
-  #   $(find \
-  #       "${srcdir}" | \
-  #       grep \
-  #         "target/release/sq")
-  # )
-  # _release=(
-  #   $(find \
-  #       "${srcdir}" | \
-  #       grep \
-  #         "target/release/")
-  # )
-  # echo \
-  #   "Results for 'target/release/':"
-  # for _res \
-  #   in "${_release[@]}"; do
-  #   echo \
-  #     "${_res}"
-  # done
-  # for _res \
-  #   in "${_sq[@]}"; do
-  #   if \
-  #     [[ ! -d "${_res}" ]] && \
-  #     [[ "$(basename \
-  #             "${_res}")" == "sq" ]]; then
-  #     break
-  #   fi
-  # done
-  # echo \
-  #   "selected result:"
-  # echo \
-  #   "${_res}"
-  # install \
-  #   -vDm755 \
-  #   "${_res}" \
-  #   -t \
-  #   "${pkgdir}/usr/bin"
-  # install \
-  #   -vDm644 \
-  #   "$( \
-  #     find \
-  #       "${srcdir}" | \
-  #       grep \
-  #         "target/shell-completions/vsq.bash")" \
-  #   "${pkgdir}/usr/share/bash-completion/completions/sq"
-  # install \
-  #   -vDm644 \
-  #   "$( \
-  #     find \
-  #       "${srcdir}" | \
-  #       grep \
-  #         "target/shell-completions/_sq")" \
-  #   -t \
-  #   "${pkgdir}/usr/share/zsh/site-functions"
-  # install \
-  #   -vDm644 \
-  #   "$( \
-  #     find \
-  #       "${srcdir}" | \
-  #       grep \
-  #         "target/shell-completions/sq.fish")" \
-  #   -t \
-  #   "${pkgdir}/usr/share/fish/vendor_completions.d"
-  # install \
-  #   -vDm644 \
-  #   "$( \
-  #     find \
-  #       "${srcdir}" | \
-  #       grep \
-  #         "target/man-pages/" | \
-  #         head \
-  #           -n \
-  #             1)"*.1 \
-  #   -t \
-  #   "${pkgdir}/usr/share/man/man1"
+  install \
+    -vDm 55 \
+    target/release/sq \
+    -t \
+    "${pkgdir}/usr/bin"
+  install \
+    -vDm644 \
+    target/shell-completions/sq.bash \
+    "${pkgdir}/usr/share/bash-completion/completions/sq"
+  install \
+    -vDm644 \
+    target/shell-completions/_sq \
+    -t \
+    "${pkgdir}/usr/share/zsh/site-functions"
+  install \
+    -vDm644 \
+    target/shell-completions/sq.fish \
+    -t \
+    "${pkgdir}/usr/share/fish/vendor_completions.d"
+  install \
+    -vDm644 \
+    target/man-pages/*.1 \
+    -t \
+    "${pkgdir}/usr/share/man/man1/"
+}
+
+
 }
 
 # vim:set sw=2 sts=-1 et:
