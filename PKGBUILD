@@ -86,7 +86,7 @@ _sq_tarname="${pkgname}-v${_sq_pkgver}"
   ) && \
   sha256sums+=(
     'ef28a21f6d240eb76c2b03699054b6d55a34a9b01746a2da33864cc60e4371f6'
-    '915367b674119f94cbd49b7faa09cf5e0b353f7d7aadc8f16edc556627e4cd27'
+    '6458274008ef06362c912eb67e285b734906acdb5c56e8490144f45bc1b81d51'
   )
 validpgpkeys=(
   D2F2C5D45BE9FDE6A4EE0AAF31855247603831FD 
@@ -111,6 +111,8 @@ _prepare() {
     _dir="${1}" \
     _target \
     _pwd
+  echo \
+    "preparing ${_dir}"
   _target="${CARCH}-unknown-linux-gnu"
   _pwd="$( \
     pwd)"
@@ -135,6 +137,7 @@ prepare() {
   _prepare \
     "${srcdir}/${_sq_tarname}"
 }
+
 cargo_opts=(
   --release
   --frozen
@@ -145,6 +148,8 @@ _build() {
     _dir="${1}" \
     _cargo_opts=() \
     _pwd
+  echo \
+    "building ${_dir}"
   _pwd="$( \
     pwd)"
   shift \
@@ -171,7 +176,7 @@ _build() {
 }
 
 build() {
-  __build \
+  _build \
     "${_tarname}" \
       --features \
         'default'
