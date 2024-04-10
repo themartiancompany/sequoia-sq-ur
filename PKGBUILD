@@ -14,8 +14,11 @@ _pkg='sequoia'
 _module="ipc"
 pkgname="${_pkg}-sq"
 pkgver=0.34.1
+_sq_pkgver=0.34.0
 _commit=fd270aeedfffc7d03f8bd61bcf0842a831ec7ded 
 # refs/tags/v0.34.1
+_sq_commit="696bf3a677fe8a34ed02c6e44afa1cc3c1e273df"
+# refs/tags/v0.34.0
 pkgrel=1
 pkgdesc='Command-line frontends for Sequoia'
 url="https://${_pkg}-pgp.org"
@@ -55,28 +58,34 @@ options=(
 _http="https://gitlab.com"
 _ns="${_pkg}-pgp"
 _url="${_http}/${_ns}/${_pkg}"
-_tarname="${_pkg}-${_module}-v${pkgver}"
+_sq_url="${_http}/${_ns}/${pkgname}"
+_tarname="${_pkg}-${_module}-v${_sq_pkgver}"
+_sq_tarname="${pkgname}-v${pkgver}"
 [[ "${_offline}" == "true" ]] && \
-  url="file://${HOME}/${pkgname}"
+  _url="file://${HOME}/${_pkg}" \
+  _sq_url="file://${HOME}/${pkgname}"
 [[ "${_git}" == true ]] && \
   makedepends+=(
     "git"
   ) && \
   source+=(
     "${_tarname}::git+${_url}#tag=${pkgver}"
+    "${_sq_tarname}::git+${_url}#tag=${_sq_pkgver}"
   ) && \
   sha256sums+=(
+    SKIP
     SKIP
   )
 [[ "${_git}" == false ]] && \
   source+=(
     # Gitlab
     "${_tarname}.tar.gz::${_url}/-/archive/${_module}/v${pkgver}/${_tarname}.tar.gz"
+    "${_sq_tarname}.tar.gz::${_sq_url}/-/archive/${_module}/v${pkgver}/${_tarname}.tar.gz"
     # Github
     # "${_tarname}.tar.gz::${_url}/archive/refs/tags/${pkgver}.tar.gz"
   ) && \
   sha256sums+=(
-
+    'ef28a21f6d240eb76c2b03699054b6d55a34a9b01746a2da33864cc60e4371f6'
     'ef28a21f6d240eb76c2b03699054b6d55a34a9b01746a2da33864cc60e4371f6'
   )
 validpgpkeys=(
@@ -97,12 +106,16 @@ validpgpkeys=(
         's/\([^-]*-g\)/r\1/;s/-/./g;s/v//g'
   }
 
-prepare() {
+_prepare() {
   local \
-    _target
+    _dir="${1}" \
+    _target \
+    _pwd
   _target="${CARCH}-unknown-linux-gnu"
+  _pwd="$( \
+    pwd)"
   cd \
-    "${_tarname}"
+    "${_dir}"
   export \
     RUSTUP_TOOLCHAIN=stable 
   [[ "${_os}" == "Android" ]] && \
@@ -112,20 +125,36 @@ prepare() {
       --locked \
       --target \
         "${_target}"
+  cd \
+    "${_pwd}"
 }
 
-build() {
+prepare() {
+  _prepare \
+    "${srcdir}/${_tarname}"
+  _prepare \
+    "${srcdir}/${_sq_tarname}"
+}
+cargo_opts=(
+  --release
+  --frozen
+)
+
+_build() {
   local \
-    _cargo_opts=()
+    _dir="${1}" \
+    _cargo_opts=() \
+    _pwd
+  _pwd="$( \
+    pwd)"
+  shift \
+    1
   _cargo_opts=(
-    --release
-    --frozen
-    # --features
-    #   'default'
-    # --all
+    "${cargo_opts[@]}"
+    "$@"
   )
   cd \
-    "${_tarname}"
+    "${_dir}"
   export \
     CARGO_TARGET_DIR=../target \
     RUSTUP_TOOLCHAIN=stable \
@@ -137,11 +166,19 @@ build() {
     build \
       "${_cargo_opts[@]}" \
       --all
-  cargo \
-    build \
-      "${_cargo_opts[@]}" \
-      -p \
-        "${pkgname}"
+  cd \
+    "${_pwd}"
+}
+
+build() {
+  __build \
+    "${_tarname}" \
+      --features \
+        'default'
+  _build \
+    "${_sq_tarname}" \
+      --features \
+        'default'
 }
 
 check() {
