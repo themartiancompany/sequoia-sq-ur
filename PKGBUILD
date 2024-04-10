@@ -59,8 +59,8 @@ _http="https://gitlab.com"
 _ns="${_pkg}-pgp"
 _url="${_http}/${_ns}/${_pkg}"
 _sq_url="${_http}/${_ns}/${pkgname}"
-_tarname="${_pkg}-${_module}-v${_sq_pkgver}"
-_sq_tarname="${pkgname}-v${pkgver}"
+_tarname="${_pkg}-${_module}-v${pkgver}"
+_sq_tarname="${pkgname}-v${_sq_pkgver}"
 [[ "${_offline}" == "true" ]] && \
   _url="file://${HOME}/${_pkg}" \
   _sq_url="file://${HOME}/${pkgname}"
@@ -80,13 +80,13 @@ _sq_tarname="${pkgname}-v${pkgver}"
   source+=(
     # Gitlab
     "${_tarname}.tar.gz::${_url}/-/archive/${_module}/v${pkgver}/${_tarname}.tar.gz"
-    "${_sq_tarname}.tar.gz::${_sq_url}/-/archive/${_module}/v${pkgver}/${_tarname}.tar.gz"
+    "${_sq_tarname}.tar.gz::${_sq_url}/-/archive/v${_sq_pkgver}/${_sq_tarname}.tar.gz"
     # Github
     # "${_tarname}.tar.gz::${_url}/archive/refs/tags/${pkgver}.tar.gz"
   ) && \
   sha256sums+=(
     'ef28a21f6d240eb76c2b03699054b6d55a34a9b01746a2da33864cc60e4371f6'
-    'ef28a21f6d240eb76c2b03699054b6d55a34a9b01746a2da33864cc60e4371f6'
+    '915367b674119f94cbd49b7faa09cf5e0b353f7d7aadc8f16edc556627e4cd27'
   )
 validpgpkeys=(
   D2F2C5D45BE9FDE6A4EE0AAF31855247603831FD 
