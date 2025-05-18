@@ -193,7 +193,7 @@ _prepare() {
       -m)"
   _msg=(
     "Preparing '${_dir}' for"
-    "architecture '${_arch}'."
+    "architecture '${_arch}' (CARCH: ${CARCH})."
   )
   msg \
     "${_msg[*]}"
@@ -226,7 +226,7 @@ _prepare() {
   if [[ "${_arch}" == "aarch64" ]]; then
     _rust_target_native="${CARCH}-linux-android"
   elif [[ "${_arch}" == "armv8l" ]]; then
-      _target="${CARCH}-linux-androideabi"
+    _rust_target_native="${CARCH}-linux-androideabi"
   elif [[ "${_arch}" == "x86_64" ]]; then
     _rust_target_native="$( \
       basename \
