@@ -137,7 +137,7 @@ elif [[ "${_git}" == false ]]; then
     # "${_tarname}.tar.gz::${_url}/archive/refs/tags/${pkgver}.tar.gz"
   )
   sha256sums+=(
-    'ef28a21f6d240eb76c2b03699054b6d55a34a9b01746a2da33864cc60e4371f6'
+    '75ebe4ed9a793a74632525ce3286ecdecc493e3c2e1a12d79f334d15b0c828b1'
     '6458274008ef06362c912eb67e285b734906acdb5c56e8490144f45bc1b81d51'
   )
 fi
