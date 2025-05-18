@@ -181,9 +181,11 @@ _prepare() {
     _pwd \
     _rust_android_targets=() \
     _rust_arch_targets=() \
+    _rust_native_taget \
     _msg=() \
     _arch \
     _usr
+  _rust_native_target=""
   _usr="$( \
     _usr_get)"
   _arch="$( \
