@@ -159,7 +159,7 @@ jobs:
                   "$(uname -m)" == "armv8l" ]]; then \
                 _rust="rust-std-armv7-linux-androideabi" \
               fi \
-              if [[ "$(uname -m)" == "x86_64" || \
+              if [[ "${RUNNER_ARCH}" == "X64" || \
                     "$(uname -m)" == "i686" || \
                     "$(uname -m)" == "aarch64" ]]; then \
                 _rust="rust" \
