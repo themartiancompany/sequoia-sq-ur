@@ -199,15 +199,22 @@ _prepare() {
   )
   msg \
     "${_msg[*]}"
-  pacman \
-    -Ql \
-    "rust" | \
-    grep \
-      "/usr/lib/rustlib/" | \
+  _rust_target_native="$( \
+    pacman \
+      -Ql \
+      "rust" | \
       grep \
-        "${CARCH}" | \
-        awk \
-          '{print $2}'
+        "/usr/lib/rustlib/" | \
+        grep \
+          "${CARCH}" | \
+          awk \
+            '{print $2}')"
+  _msg=(
+    "Rust native architecture target:"
+    "${_rust_arch_targets[*]}"
+  )
+  msg \
+    "${_msg[*]}"
   _pwd="$( \
     pwd)"
   cd \
