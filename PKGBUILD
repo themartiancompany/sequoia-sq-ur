@@ -237,12 +237,15 @@ _prepare() {
   msg \
     "${_msg[*]}"
   if [[ "${_os}" == "Android" ]]; then
-    echo
-  fi
-  if [[ "${_arch}" == "arm" ]]; then
-    echo
-  elif [[ "${_arch}" == "x86_64" ]]; then
-    echo
+    if [[ "${_arch}" == "arm" ]]; then
+      _target="${CARCH}-linux-androideabi"
+    elif [[ "${_arch}" == "x86_64" ]]; then
+      _target="${_rust_target_native}"
+    fi
+  elif [[ "${_os}" == "GNU/Linux" ]]; then
+    if [[ "${_arch}" == "x86_64" ]]; then
+      _target="${CARCH}-unknown-linux-gnu"
+    fi
   fi
   _pwd="$( \
     pwd)"
@@ -250,11 +253,6 @@ _prepare() {
     "${_dir}"
   export \
     RUSTUP_TOOLCHAIN="stable"
-  if [[ "${_os}" == "Android" ]]; then
-    _target="${CARCH}-linux-androideabi"
-  elif [[ "${_os}" == "GNU/Linux" ]]; then
-    _target="${CARCH}-unknown-linux-gnu"
-  fi
   cargo \
     fetch \
       --locked \
