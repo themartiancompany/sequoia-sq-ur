@@ -223,6 +223,8 @@ _prepare() {
   )
   # find \
   #   "${_usr}/lib/rustlib"
+  if [[ "${_arch}" == "aarch64" ]]; then
+    _rust_target_native="${CARCH}-linux-android"
   if [[ "${_arch}" == "x86_64" ]]; then
     _rust_target_native="$( \
       basename \
@@ -262,7 +264,7 @@ _prepare() {
     if [[ "${_arch}" == "armv8l" ]]; then
       _target="${CARCH}-linux-androideabi"
     elif [[ "${_arch}" == "aarch64" ]]; then
-      _target="${CARCH}-linux-android"
+      _target="${_rust_target_native}"
       # _target="arm-linux-android"
     elif [[ "${_arch}" == "arm" ]]; then
       _target="${CARCH}-linux-androideabi"
