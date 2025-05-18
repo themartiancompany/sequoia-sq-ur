@@ -51,7 +51,10 @@ _pkg="${_proj}"
 _module="ipc"
 pkgname="${_pkg}-sq"
 pkgver=1.3.1
+_ipc_pkgver="0.36.0"
 _sq_pkgver=0.34.0
+# refs/tags/v0.36.0
+_commit="357b26ad13b1beb5db84899a99e0a57249ed1ea2"
 _commit="fd270aeedfffc7d03f8bd61bcf0842a831ec7ded"
 # refs/tags/v0.34.1
 _sq_commit="696bf3a677fe8a34ed02c6e44afa1cc3c1e273df"
@@ -107,7 +110,7 @@ _http="https://gitlab.com"
 _ns="${_pkg}-pgp"
 _url="${_http}/${_ns}/${_pkg}"
 _sq_url="${_http}/${_ns}/${pkgname}"
-_tarname="${_pkg}-${_module}-v${pkgver}"
+_tarname="${_pkg}-${_module}-v${_pkgver}"
 _sq_tarname="${pkgname}-v${_sq_pkgver}"
 if [[ "${_offline}" == "true" ]]; then
   _url="file://${HOME}/${_pkg}" \
@@ -128,7 +131,7 @@ if [[ "${_git}" == true ]]; then
 elif [[ "${_git}" == false ]]; then
   source+=(
     # Gitlab
-    "${_tarname}.tar.gz::${_url}/-/archive/${_module}/v${pkgver}/${_tarname}.tar.gz"
+    "${_tarname}.tar.gz::${_url}/-/archive/${_module}/v${_pkgver}/${_tarname}.tar.gz"
     "${_sq_tarname}.tar.gz::${_sq_url}/-/archive/v${_sq_pkgver}/${_sq_tarname}.tar.gz"
     # Github
     # "${_tarname}.tar.gz::${_url}/archive/refs/tags/${pkgver}.tar.gz"
