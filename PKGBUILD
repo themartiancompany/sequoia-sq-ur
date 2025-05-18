@@ -220,18 +220,31 @@ _prepare() {
   )
   # find \
   #   "${_usr}/lib/rustlib"
-  _rust_target_native="$( \
-    basename \
-      "$(find \
-           "${_usr}/lib/rustlib" \
-           -type \
-             "d" | \
-           head \
-             -n \
-               2 | \
-             tail \
+  if [[ "${_arch}" == "x86_64" ]]; then
+    _rust_target_native="$( \
+      basename \
+        "$(find \
+             "${_usr}/lib/rustlib" \
+             -type \
+               "d" | \
+             head \
                -n \
-                 1)")"
+                 2 | \
+               tail \
+                 -n \
+                   1)")"
+  elif [[ "${_arch}" == "i686" ]]; then
+    find \
+    "${_usr}/lib/rustlib" \
+    -type \
+      "d" | \
+    head \
+      -n \
+        2 # | \
+      # tail \
+      #   -n \
+      #     1)"
+  fi
     # -depth \
     #   "1" | \
     #   grep \
