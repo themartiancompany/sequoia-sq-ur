@@ -274,7 +274,7 @@ _prepare() {
       # _target="arm-linux-android"
     elif [[ "${_arch}" == "arm" ]]; then
       _target="${CARCH}-linux-androideabi"
-    elif [[ "${_arch}" == "armv7" ]]; then
+    elif [[ "${_arch}" == "armv7l" ]]; then
       _target="${CARCH}-linux-androideabi"
     elif [[ "${_arch}" == "i686" ]]; then
       _target="${_rust_target_native}"
