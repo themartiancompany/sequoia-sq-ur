@@ -138,17 +138,17 @@ elif [[ "${_git}" == false ]]; then
   )
   sha256sums+=(
     '75ebe4ed9a793a74632525ce3286ecdecc493e3c2e1a12d79f334d15b0c828b1'
-    '6458274008ef06362c912eb67e285b734906acdb5c56e8490144f45bc1b81d51'
+    '9f112096f413e195ec737c81abb5649604f16e1f6dbe64a8accc5bb3ad39e239'
   )
 fi
 validpgpkeys=(
-  D2F2C5D45BE9FDE6A4EE0AAF31855247603831FD 
   # Justus Winter (Code Signing Key) <justus@sequoia-pgp.org>
-  8F17777118A33DDA9BA48E62AACB3243630052D9 
+  "D2F2C5D45BE9FDE6A4EE0AAF31855247603831FD"
   # Neal H. Walfield <neal@sequoia-pgp.org>
+  "8F17777118A33DDA9BA48E62AACB3243630052D9"
 )
 
-[[ "${_git}" == true ]] && \
+if [[ "${_git}" == true ]]; then
   pkgver() {
     cd \
       "${_tarname}"
@@ -158,6 +158,7 @@ validpgpkeys=(
       sed \
         's/\([^-]*-g\)/r\1/;s/-/./g;s/v//g'
   }
+fi
 
 _usr_get() {
   local \
