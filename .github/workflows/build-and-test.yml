@@ -42,10 +42,10 @@ jobs:
               ubuntu-24.04
             architecture:
               x86_64
-          # - runner:
-          #     ubuntu-24.04-arm
-          #   architecture:
-          #     arm
+          - runner:
+              ubuntu-24.04-arm
+            architecture:
+              arm
           - runner:
               ubuntu-24.04-arm
             architecture:
