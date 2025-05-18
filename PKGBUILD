@@ -156,6 +156,24 @@ validpgpkeys=(
         's/\([^-]*-g\)/r\1/;s/-/./g;s/v//g'
   }
 
+_usr_get() {
+  local \
+    _bin
+  _bin="$( \
+    dirname \
+      "$(command \
+           -v \
+           "clang" \
+           "cxx" \
+           "g++" | \
+           head \
+	     -n \
+	       1)")"
+  echo \
+    "$(dirname \
+         "${_bin}")"
+}
+
 _prepare() {
   local \
     _dir="${1}" \
@@ -200,15 +218,13 @@ _prepare() {
   msg \
     "${_msg[*]}"
   _rust_target_native="$( \
-    pacman \
-      -Ql \
-      "rust" | \
-      grep \
-        "/usr/lib/rustlib/" | \
-        grep \
-          "${CARCH}" | \
-          awk \
-            '{print $2}')"
+    find \
+      -type \
+        "d" \
+      "${_usr}/lib/rustlib" | \
+      head \
+        -n \
+          1)"
   _msg=(
     "Rust native architecture target:"
     "${_rust_target_native}"
