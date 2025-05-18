@@ -155,7 +155,6 @@ jobs:
             /entrypoint.sh \
               echo \
                 "Architecture: ${_arch}" && \
-            bash \
               if [[ "$(uname -m)" == "armv7l" || \
                   "$(uname -m)" == "armv8l" ]]; then \
                 _rust="rust-std-armv7-linux-androideabi" \
@@ -165,8 +164,8 @@ jobs:
                     "$(uname -m)" == "aarch64" ]]; then \
                 _rust="rust" \
               fi && \
-            export \
-              _rust="${_rust}" && \
+              export \
+                _rust="${_rust}" ) && \
             /entrypoint.sh \
               apt \
                 install \
