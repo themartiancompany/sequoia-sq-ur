@@ -238,9 +238,11 @@ _prepare() {
     "${_usr}/lib/rustlib" \
     -type \
       "d" | \
-    head \
-      -n \
-        5 # | \
+      grep \ | \
+        "/${_arch}-" | \
+        head \
+          -n \
+            5 # | \
       # tail \
       #   -n \
       #     1)"
