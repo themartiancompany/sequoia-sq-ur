@@ -238,7 +238,7 @@ _prepare() {
     "${_usr}/lib/rustlib" \
     -type \
       "d" | \
-      grep \ | \
+      grep \
         "${_usr}/lib/rustlib/${_arch}-" | \
         head \
           -n \
