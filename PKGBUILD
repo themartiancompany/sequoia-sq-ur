@@ -251,7 +251,8 @@ _prepare() {
   fi
   _msg=(
     "Rust native architecture target:"
-    "${_rust_target_native}"
+    "'${_rust_target_native}'"
+    "(CARCH: '${CARCH}')"
   )
   msg \
     "${_msg[*]}"
