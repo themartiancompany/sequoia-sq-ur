@@ -223,7 +223,9 @@ _prepare() {
   find \
     "${_usr}/lib/rustlib" \
       -type \
-        "d"
+        "d" \
+      -depth \
+        1
   _rust_target_native="$( \
     basename \
       "$(find \
