@@ -52,7 +52,7 @@ _module="ipc"
 pkgname="${_pkg}-sq"
 pkgver=1.3.1
 _ipc_pkgver="0.36.0"
-_sq_pkgver=0.34.0
+_sq_pkgver="${pkgver}"
 # refs/tags/v0.36.0
 _commit="357b26ad13b1beb5db84899a99e0a57249ed1ea2"
 _commit="fd270aeedfffc7d03f8bd61bcf0842a831ec7ded"
