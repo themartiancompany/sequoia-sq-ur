@@ -220,16 +220,17 @@ _prepare() {
   )
   # find \
   #   "${_usr}/lib/rustlib"
-  find \
-    "${_usr}/lib/rustlib" \
-    -type \
-      "d" | \
-      head \
-        -n \
-          2 | \
-        tail \
-          -n \
-            1
+  basename \
+    "$(find \
+         "${_usr}/lib/rustlib" \
+         -type \
+           "d" | \
+         head \
+           -n \
+             2 | \
+           tail \
+             -n \
+               1)"
     # -depth \
     #   "1" | \
     #   grep \
