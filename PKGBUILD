@@ -234,39 +234,17 @@ _prepare() {
                  -n \
                    1)")"
   elif [[ "${_arch}" == "i686" ]]; then
-    find \
-    "${_usr}/lib/rustlib" \
-    -type \
-      "d" | \
-      grep \
-        "${_usr}/lib/rustlib/${_arch}-" | \
-        head \
-          -n \
-            1 # | \
-      # tail \
-      #   -n \
-      #     1)"
+    _rust_target_native="$( \
+      find \
+      "${_usr}/lib/rustlib" \
+      -type \
+        "d" | \
+        grep \
+          "${_usr}/lib/rustlib/${_arch}-" | \
+          head \
+            -n \
+              1)"
   fi
-    # -depth \
-    #   "1" | \
-    #   grep \
-    #     "/${_arch}-"
-  # _rust_target_native="$( \
-  #   basename \
-  #     "$(find \
-  #          "${_usr}/lib/rustlib" \
-  #          -type \
-  #            "d" \
-  #          -depth \
-  #            "1" | \
-  #          grep | \
-  #            "/${_arch}-" | \
-  #            head \
-  #              -n \
-  #                2 | \
-  #              tail \
-  #                -n \
-  #                  1)")"
   _msg=(
     "Rust native architecture target:"
     "${_rust_target_native}"
