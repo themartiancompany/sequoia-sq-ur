@@ -222,9 +222,9 @@ _prepare() {
     "${_msg[*]}"
   _rust_target_native="$( \
     find \
+      "${_usr}/lib/rustlib" \
       -type \
-        "d" \
-      "${_usr}/lib/rustlib" | \
+        "d" | \
       head \
         -n \
           1)"
