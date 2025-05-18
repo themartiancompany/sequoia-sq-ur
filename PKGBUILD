@@ -223,11 +223,11 @@ _prepare() {
   find \
     "${_usr}/lib/rustlib" \
     -type \
-      "d" \
-    -depth \
-      "1" | \
-      grep \
-        "/${_arch}-"
+      "d"
+    # -depth \
+    #   "1" | \
+    #   grep \
+    #     "/${_arch}-"
   _rust_target_native="$( \
     basename \
       "$(find \
