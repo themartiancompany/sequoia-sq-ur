@@ -258,8 +258,8 @@ _prepare() {
   msg \
     "${_msg[*]}"
   if [[ "${_os}" == "Android" ]]; then
-    if [[ "${_arch}" == "aarch64" ]]; then
-      _target="${CARCH}-linux-android"
+    if [[ "${_arch}" == "armv8l" ]]; then
+      _target="aarch64-linux-android"
     elif [[ "${_arch}" == "arm" ]]; then
       _target="${CARCH}-linux-androideabi"
     elif [[ "${_arch}" == "armv7" ]]; then
