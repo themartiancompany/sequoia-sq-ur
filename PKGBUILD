@@ -257,6 +257,8 @@ _prepare() {
   if [[ "${_os}" == "Android" ]]; then
     if [[ "${_arch}" == "arm" ]]; then
       _target="${CARCH}-linux-androideabi"
+    elif [[ "${_arch}" == "i686" ]]; then
+      _target="${_rust_target_native}"
     elif [[ "${_arch}" == "x86_64" ]]; then
       _target="${_rust_target_native}"
     fi
