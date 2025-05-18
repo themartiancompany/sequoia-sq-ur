@@ -190,7 +190,7 @@ _prepare() {
     uname \
       -m)"
   _msg=(
-    "Preparing '${_dir}'."
+    "Preparing '${_dir}' for architecture."
   )
   msg \
     "${_msg[*]}"
@@ -223,7 +223,13 @@ _prepare() {
   find \
     "${_usr}/lib/rustlib" \
     -type \
-      "d"
+      "d" | \
+      head \
+        -n \
+          2 | \
+        tail \
+          -n \
+            1
     # -depth \
     #   "1" | \
     #   grep \
