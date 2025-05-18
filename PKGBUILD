@@ -110,7 +110,7 @@ _http="https://gitlab.com"
 _ns="${_pkg}-pgp"
 _url="${_http}/${_ns}/${_pkg}"
 _sq_url="${_http}/${_ns}/${pkgname}"
-_tarname="${_pkg}-${_module}-v${_pkgver}"
+_tarname="${_pkg}-${_module}-v${_ipc_pkgver}"
 _sq_tarname="${pkgname}-v${_sq_pkgver}"
 if [[ "${_offline}" == "true" ]]; then
   _url="file://${HOME}/${_pkg}" \
@@ -121,7 +121,7 @@ if [[ "${_git}" == true ]]; then
     "git"
   )
   source+=(
-    "${_tarname}::git+${_url}#tag=${pkgver}"
+    "${_tarname}::git+${_url}#tag=${_ipc_pkgver}"
     "${_sq_tarname}::git+${_url}#tag=${_sq_pkgver}"
   )
   sha256sums+=(
@@ -131,7 +131,7 @@ if [[ "${_git}" == true ]]; then
 elif [[ "${_git}" == false ]]; then
   source+=(
     # Gitlab
-    "${_tarname}.tar.gz::${_url}/-/archive/${_module}/v${_pkgver}/${_tarname}.tar.gz"
+    "${_tarname}.tar.gz::${_url}/-/archive/${_module}/v${_ipc_pkgver}/${_tarname}.tar.gz"
     "${_sq_tarname}.tar.gz::${_sq_url}/-/archive/v${_sq_pkgver}/${_sq_tarname}.tar.gz"
     # Github
     # "${_tarname}.tar.gz::${_url}/archive/refs/tags/${pkgver}.tar.gz"
