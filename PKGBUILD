@@ -235,7 +235,7 @@ _prepare() {
   elif [[ "${_arch}" == "armv7l" ]]; then
     _rust_target_native="arm-linux-androideabi"
   elif [[ "${_arch}" == "armv8l" ]]; then
-    _rust_target_native="arm-linux-androideabi"
+    _rust_target_native="armv7-linux-androideabi"
   elif [[ "${_arch}" == "x86_64" ]]; then
     _rust_target_native="$( \
       basename \
