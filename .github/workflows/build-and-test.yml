@@ -165,7 +165,7 @@ jobs:
                 _rust="rust"; \
               fi && \
               export \
-                _rust="${_rust}" && \
+                _rust="${_rust}"; && \
             /entrypoint.sh \
               apt \
                 install \
