@@ -150,7 +150,7 @@ jobs:
         run: |
           _arch="$( \
             uname \
-              -o)" ; \
+              -m)" ; \
           if [[ "${_arch}" == "armv8l" ]]; then \
             _rust="rust-std-armv7-linux-androideabi"; \
           elif [[ "${_arch}" == "armv8l" ]]; then \
