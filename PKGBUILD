@@ -194,13 +194,19 @@ _prepare() {
   )
   msg \
     "${_msg[*]}"
-  _rust_android_targets+=( $( \
-    rustc \
-      --print \
-        "target-list" | \
-          grep \
-            "androideabi")
-  )
+    _rust_android_targets+=( $( \
+      rustc \
+        --print \
+          "target-list" | \
+            grep \
+              "android")
+    )
+    _msg=(
+      "Available Rust Android targets:"
+      "${_rust_android_targets[*]}"
+    )
+    msg \
+      "${_msg[*]}"
   _rust_arch_targets+=( $( \
     rustc \
       --print \
@@ -209,17 +215,17 @@ _prepare() {
             "${_arch}")
   )
   _msg=(
-    "Available Rust Android targets:"
-    "${_rust_android_targets[*]}"
-  )
-  msg \
-    "${_msg[*]}"
-  _msg=(
     "Available Rust architecture targets:"
     "${_rust_arch_targets[*]}"
   )
   msg \
     "${_msg[*]}"
+  if [[ "${_os}" == "Android" ]]; then
+    echo
+  fi
+  if [[ "${_arch}" == "arm" ]]; then
+  elif [[ "${_arch}" == "x86_64" ]]; then
+  fi
   find \
     "${_usr}/lib/rustlib"
   _rust_target_native="$( \
@@ -229,7 +235,7 @@ _prepare() {
         "d" | \
       head \
         -n \
-          1)"
+          2)"
   _msg=(
     "Rust native architecture target:"
     "${_rust_target_native}"
