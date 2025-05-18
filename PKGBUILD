@@ -260,6 +260,8 @@ _prepare() {
   if [[ "${_os}" == "Android" ]]; then
     if [[ "${_arch}" == "armv8l" ]]; then
       _target="${CARCH}-linux-androideabi"
+    elif [[ "${_arch}" == "aarch64" ]]; then
+      _target="${CARCH}-linux-android"
       # _target="arm-linux-android"
     elif [[ "${_arch}" == "arm" ]]; then
       _target="${CARCH}-linux-androideabi"
