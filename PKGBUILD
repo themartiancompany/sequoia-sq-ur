@@ -1,21 +1,47 @@
 # SPDX-License-Identifier: AGPL-3.0
+
+#    ----------------------------------------------------------------------
+#    Copyright © 2023, 2024, 2025  Pellegrino Prevete
 #
-# Maintainer: Pellegrino Prevete (tallero) <pellegrinoprevete@gmail.com>
+#    All rights reserved
+#    ----------------------------------------------------------------------
+#
+#    This program is free software: you can redistribute it and/or modify
+#    it under the terms of the GNU Affero General Public License as published by
+#    the Free Software Foundation, either version 3 of the License, or
+#    (at your option) any later version.
+#
+#    This program is distributed in the hope that it will be useful,
+#    but WITHOUT ANY WARRANTY; without even the implied warranty of
+#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#    GNU Affero General Public License for more details.
+#
+#    You should have received a copy of the GNU Affero General Public License
+#    along with this program.  If not, see <https://www.gnu.org/licenses/>.
+
 # Maintainer: Truocolo <truocolo@aol.com>
+# Maintainer: Truocolo <truocolo@0x6E5163fC4BFc1511Dbe06bB605cc14a3e462332b>
+# Maintainer: Pellegrino Prevete (dvorak) <pellegrinoprevete@gmail.com>
+# Maintainer: Pellegrino Prevete (dvorak) <dvorak@0x87003Bd6C074C713783df04f36517451fF34CBEf>
 # Maintainer: Levente Polyak <anthraxx[at]archlinux[dot]org>
 # Maintainer: David Runge <dvzrv@archlinux.org>
 
-_git="false"
-_offline="false"
+if [[ ! -v "_git" ]]; then
+  _git="false"
+fi
+if [[ ! -v "_offline" ]]; then
+  _offline="false"
+fi
 _os="$( \
   uname \
     -o)"
-_pkg='sequoia'
+_proj="sequoia"
+_pkg="${_proj}"
 _module="ipc"
 pkgname="${_pkg}-sq"
 pkgver=0.34.1
 _sq_pkgver=0.34.0
-_commit=fd270aeedfffc7d03f8bd61bcf0842a831ec7ded 
+_commit="fd270aeedfffc7d03f8bd61bcf0842a831ec7ded"
 # refs/tags/v0.34.1
 _sq_commit="696bf3a677fe8a34ed02c6e44afa1cc3c1e273df"
 # refs/tags/v0.34.0
@@ -38,11 +64,14 @@ replaces=(
   "${_pkg}"
 )
 depends=(
-  'bzip2' 'libbz2.so'
+  'bzip2'
+  'libbz2.so'
   'gcc-libs'
   'glibc'
   'gmp'
-  'nettle' 'libnettle.so' 'libhogweed.so'
+  'nettle'
+  'libnettle.so'
+  'libhogweed.so'
   'openssl'
   'sqlite'
 )
@@ -61,33 +90,35 @@ _url="${_http}/${_ns}/${_pkg}"
 _sq_url="${_http}/${_ns}/${pkgname}"
 _tarname="${_pkg}-${_module}-v${pkgver}"
 _sq_tarname="${pkgname}-v${_sq_pkgver}"
-[[ "${_offline}" == "true" ]] && \
+if [[ "${_offline}" == "true" ]]; then
   _url="file://${HOME}/${_pkg}" \
   _sq_url="file://${HOME}/${pkgname}"
-[[ "${_git}" == true ]] && \
+fi
+if [[ "${_git}" == true ]]; then
   makedepends+=(
     "git"
-  ) && \
+  )
   source+=(
     "${_tarname}::git+${_url}#tag=${pkgver}"
     "${_sq_tarname}::git+${_url}#tag=${_sq_pkgver}"
-  ) && \
-  sha256sums+=(
-    SKIP
-    SKIP
   )
-[[ "${_git}" == false ]] && \
+  sha256sums+=(
+    "SKIP"
+    "SKIP"
+  )
+elif [[ "${_git}" == false ]]; then
   source+=(
     # Gitlab
     "${_tarname}.tar.gz::${_url}/-/archive/${_module}/v${pkgver}/${_tarname}.tar.gz"
     "${_sq_tarname}.tar.gz::${_sq_url}/-/archive/v${_sq_pkgver}/${_sq_tarname}.tar.gz"
     # Github
     # "${_tarname}.tar.gz::${_url}/archive/refs/tags/${pkgver}.tar.gz"
-  ) && \
+  )
   sha256sums+=(
     'ef28a21f6d240eb76c2b03699054b6d55a34a9b01746a2da33864cc60e4371f6'
     '6458274008ef06362c912eb67e285b734906acdb5c56e8490144f45bc1b81d51'
   )
+fi
 validpgpkeys=(
   D2F2C5D45BE9FDE6A4EE0AAF31855247603831FD 
   # Justus Winter (Code Signing Key) <justus@sequoia-pgp.org>
