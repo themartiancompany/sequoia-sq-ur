@@ -239,10 +239,10 @@ _prepare() {
     -type \
       "d" | \
       grep \ | \
-        "/${_arch}-" | \
+        "${_usr}/lib/rustlib/${_arch}-" | \
         head \
           -n \
-            5 # | \
+            1 # | \
       # tail \
       #   -n \
       #     1)"
