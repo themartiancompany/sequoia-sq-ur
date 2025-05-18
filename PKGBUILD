@@ -235,6 +235,15 @@ _prepare() {
   elif [[ "${_arch}" == "armv7l" ]]; then
     _rust_target_native="armv7-linux-androideabi"
   elif [[ "${_arch}" == "armv8l" ]]; then
+    find \
+      "${_usr}/lib/rustlib" \
+      -type \
+        "d" # | \
+        # grep \
+        #   "${_usr}/lib/rustlib/${_arch}-" | \
+        #   head \
+        #     -n \
+        #       1)")"
     _rust_target_native="armv7-linux-androideabi"
   elif [[ "${_arch}" == "x86_64" ]]; then
     _rust_target_native="$( \
@@ -252,15 +261,15 @@ _prepare() {
   elif [[ "${_arch}" == "i686" ]]; then
     _rust_target_native="$( \
       basename \
-      "$(find \
-           "${_usr}/lib/rustlib" \
-           -type \
-             "d" | \
-             grep \
-               "${_usr}/lib/rustlib/${_arch}-" | \
-               head \
-                 -n \
-                   1)")"
+        "$(find \
+             "${_usr}/lib/rustlib" \
+             -type \
+               "d" | \
+               grep \
+                 "${_usr}/lib/rustlib/${_arch}-" | \
+                 head \
+                   -n \
+                     1)")"
   fi
   _msg=(
     "Rust native architecture target:"
