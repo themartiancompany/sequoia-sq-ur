@@ -162,6 +162,14 @@ jobs:
                 -y \
                 "git"
       - name:
+          Install Capnproto.
+        run: |
+          /entrypoint.sh \
+            pkg \
+              install \
+                -y \
+                "capnproto"
+      - name:
           Install Pacman.
         run: |
           /entrypoint.sh \
