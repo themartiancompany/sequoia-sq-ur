@@ -182,7 +182,10 @@ _prepare() {
     _rust_android_targets=() \
     _rust_arch_targets=() \
     _msg=() \
-    _arch
+    _arch \
+    _usr
+  _usr="$( \
+    _usr_get)"
   _arch="$( \
     uname \
       -m)"
