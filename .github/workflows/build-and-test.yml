@@ -565,7 +565,7 @@ jobs:
             reallymakepkg \
               -v \
               -w \
-                "${HOME}/libcrash-bash-build" \
+                "${HOME}/sequoia-sq-build" \
               -- \
               -df \
               --nocheck
