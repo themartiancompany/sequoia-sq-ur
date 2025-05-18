@@ -160,33 +160,54 @@ _prepare() {
   local \
     _dir="${1}" \
     _target \
-    _pwd
+    _pwd \
+    _rust_android_targets=() \
+    _rust_arch_targets=() \
+    _msg=() \
+    _arch
+  _arch="$( \
+    uname \
+      -m)"
+  _msg=(
+    "Preparing '${_dir}'."
+  )
   msg \
-    "Preparing ${_dir}"
+    "${_msg[*]}"
+  _rust_android_targets+=( $( \
+    rustc \
+      --print \
+        "target-list" | \
+          grep \
+            "androideabi")
+  )
+  _rust_arch_targets+=( $( \
+    rustc \
+      --print \
+        "target-list" | \
+          grep \
+            "${_arch}")
+  )
+  _msg=(
+    "Available Rust Android targets:"
+    "${_rust_android_targets[*]}"
+  )
   msg \
-    "Available rust Android targets:"
-  rustc \
-    --print \
-      "target-list" | \
-      grep \
-        "androideabi"
-  rustc \
-    --print \
-      "target-list" | \
-      grep \
-        "androideabi"
+    "${_msg[*]}"
+  _msg=(
+    "Available Rust architecture targets:"
+    "${_rust_arch_targets[*]}"
+  )
   msg \
-    "Available rust architecture targets:"
- pacman \
+    "${_msg[*]}"
+  pacman \
     -Ql \
     "rust" | \
     grep \
       "/usr/lib/rustlib/" | \
       grep \
-        "/${CARCH}" | \
+        "${CARCH}" | \
         awk \
           '{print $2}'
-  _target="${CARCH}-unknown-linux-gnu"
   _pwd="$( \
     pwd)"
   cd \
@@ -195,6 +216,8 @@ _prepare() {
     RUSTUP_TOOLCHAIN="stable"
   if [[ "${_os}" == "Android" ]]; then
     _target="${CARCH}-linux-androideabi"
+  elif [[ "${_os}" == "GNU/Linux" ]]; then
+    _target="${CARCH}-unknown-linux-gnu"
   fi
   cargo \
     fetch \
