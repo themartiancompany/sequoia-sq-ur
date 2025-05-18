@@ -143,6 +143,14 @@ jobs:
                 -y \
                 "python"
       - name:
+          Install Cargo.
+        run: |
+          /entrypoint.sh \
+            pkg \
+              install \
+                -y \
+                "cargo"
+      - name:
           Install Git.
         run: |
           /entrypoint.sh \
