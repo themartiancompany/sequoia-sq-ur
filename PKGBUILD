@@ -390,7 +390,7 @@ check() {
 
 package() {
   install \
-    -vDm 55 \
+    -vDm755 \
     target/release/sq \
     -t \
     "${pkgdir}/usr/bin"
