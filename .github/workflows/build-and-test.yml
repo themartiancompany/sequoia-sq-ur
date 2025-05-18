@@ -30,7 +30,7 @@ on: [push, pull_request]
 
 jobs:
   # This is what is currently necessary to make termux-docker work with GHA.
-  working:
+  termux:
     strategy:
       matrix:
         include:
