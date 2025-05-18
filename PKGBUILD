@@ -161,17 +161,23 @@ _prepare() {
     _dir="${1}" \
     _target \
     _pwd
-  echo \
-    "preparing ${_dir}"
+  msg \
+    "Preparing ${_dir}"
+  msg \
+    "Available targets ${_dir}:"
+  rustc \
+    --print \
+      "target-list"
   _target="${CARCH}-unknown-linux-gnu"
   _pwd="$( \
     pwd)"
   cd \
     "${_dir}"
   export \
-    RUSTUP_TOOLCHAIN=stable 
-  [[ "${_os}" == "Android" ]] && \
+    RUSTUP_TOOLCHAIN="stable"
+  if [[ "${_os}" == "Android" ]]; then
     _target="${CARCH}-linux-androideabi"
+  fi
   cargo \
     fetch \
       --locked \
