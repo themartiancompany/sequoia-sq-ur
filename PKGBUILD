@@ -50,7 +50,7 @@ _proj="sequoia"
 _pkg="${_proj}"
 _module="ipc"
 pkgname="${_pkg}-sq"
-pkgver=0.34.1
+pkgver=1.3.1
 _sq_pkgver=0.34.0
 _commit="fd270aeedfffc7d03f8bd61bcf0842a831ec7ded"
 # refs/tags/v0.34.1
@@ -319,8 +319,8 @@ _build() {
     _dir="${1}" \
     _cargo_opts=() \
     _pwd
-  echo \
-    "building ${_dir}"
+  msg \
+    "building ${_dir}."
   _pwd="$( \
     pwd)"
   shift \
@@ -332,9 +332,9 @@ _build() {
   cd \
     "${_dir}"
   export \
-    CARGO_TARGET_DIR=../target \
-    RUSTUP_TOOLCHAIN=stable \
-    ASSET_OUT_DIR=../target
+    CARGO_TARGET_DIR="../target" \
+    RUSTUP_TOOLCHAIN="stable" \
+    ASSET_OUT_DIR="../target"
   # NOTE:
   #   we select specific (default) features,
   #   as there are multiple crypto backends
@@ -364,8 +364,8 @@ check() {
   # as otherwise cargo test --release alters the sq binary
   # https://gitlab.com/sequoia-pgp/sequoia-sq/-/issues/96
   export \
-    CARGO_TARGET_DIR=../target-test \
-    RUSTUP_TOOLCHAIN=stable
+    CARGO_TARGET_DIR="../target-test" \
+    RUSTUP_TOOLCHAIN="stable"
   cargo \
     test \
     --release \
