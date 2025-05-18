@@ -168,6 +168,20 @@ _prepare() {
   rustc \
     --print \
       "target-list"
+  msg \
+    "Rust main target ${_dir}:"
+ pacman \
+    -Ql \
+    "rust" | \
+    grep \
+      "/usr/lib/rustlib/" | \
+      head \
+        -n 2 | \
+      tail \
+        -n \
+          1 | \
+        awk \
+          '{print $2}'
   _target="${CARCH}-unknown-linux-gnu"
   _pwd="$( \
     pwd)"
