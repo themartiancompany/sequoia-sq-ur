@@ -149,7 +149,7 @@ jobs:
           Install Cargo.
         run: |
           /entrypoint.sh \
-            pkg \
+            apt \
               install \
                 -y \
                 "rust"
