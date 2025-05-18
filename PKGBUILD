@@ -167,7 +167,9 @@ _prepare() {
     "Available targets ${_dir}:"
   rustc \
     --print \
-      "target-list"
+      "target-list" | \
+      grep \
+        "androideabi"
   msg \
     "Rust main target ${_dir}:"
  pacman \
