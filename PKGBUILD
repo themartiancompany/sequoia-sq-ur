@@ -190,7 +190,8 @@ _prepare() {
     uname \
       -m)"
   _msg=(
-    "Preparing '${_dir}' for architecture."
+    "Preparing '${_dir}' for"
+    "architecture '${_arch}'."
   )
   msg \
     "${_msg[*]}"
