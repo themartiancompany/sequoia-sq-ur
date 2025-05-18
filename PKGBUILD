@@ -221,13 +221,17 @@ _prepare() {
   find \
     "${_usr}/lib/rustlib"
   _rust_target_native="$( \
-    find \
-      "${_usr}/lib/rustlib" \
-      -type \
-        "d" | \
-      head \
-        -n \
-          2)"
+    basename \
+      "$(find \
+           "${_usr}/lib/rustlib" \
+           -type \
+             "d" | \
+           head \
+             -n \
+               2 | \
+             tail \
+               -n \
+                 1)")"
   _msg=(
     "Rust native architecture target:"
     "${_rust_target_native}"
