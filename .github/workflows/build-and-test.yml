@@ -152,6 +152,8 @@ jobs:
             _arch="$( \
               uname \
                 -m)" && \
+          echo \
+            "Architecture: ${_arch}" && \
           if [[ "$(uname -m)" == "armv7l" || \
                 "$(uname -m)" == "armv8l" ]]; then \
             _rust="rust-std-armv7-linux-androideabi" \
