@@ -35,6 +35,13 @@ fi
 _os="$( \
   uname \
     -o)"
+if [[ "${_os}" == "Android" ]]; then
+  _libc="ndk-sysroot"
+  _cc="clang"
+elif [[ "${_os}" == "GNU/Linux" ]]; then
+  _cc="gcc"
+  _libc="glibc" 
+fi
 _proj="sequoia"
 _pkg="${_proj}"
 _module="ipc"
@@ -67,7 +74,7 @@ depends=(
   'bzip2'
   'libbz2.so'
   'gcc-libs'
-  'glibc'
+  "${_libc}"
   'gmp'
   'nettle'
   'libnettle.so'
@@ -78,8 +85,7 @@ depends=(
 makedepends=(
   'capnproto'
   'cargo'
-  'clang'
-  'git'
+  "${_cc}"
 )
 options=(
   '!lto'
