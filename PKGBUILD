@@ -218,8 +218,12 @@ _prepare() {
     "Available Rust architecture targets:"
     "${_rust_arch_targets[*]}"
   )
+  # find \
+  #   "${_usr}/lib/rustlib"
   find \
-    "${_usr}/lib/rustlib"
+    "${_usr}/lib/rustlib" \
+      -type \
+        "d"
   _rust_target_native="$( \
     basename \
       "$(find \
