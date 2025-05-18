@@ -151,7 +151,7 @@ jobs:
           export \
             _arch="$( \
               uname \
-                -m)" &&
+                -m)" && \
           if [[ "${_arch}" == "armv8l" ]]; then \
             _rust="rust-std-armv7-linux-androideabi" \
           elif [[ "${_arch}" == "x86_64" || \
