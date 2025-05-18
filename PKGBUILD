@@ -220,6 +220,8 @@ _prepare() {
   )
   msg \
     "${_msg[*]}"
+  find \
+    "${_usr}/lib/rustlib"
   _rust_target_native="$( \
     find \
       "${_usr}/lib/rustlib" \
