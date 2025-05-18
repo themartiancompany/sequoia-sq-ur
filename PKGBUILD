@@ -272,15 +272,15 @@ _prepare() {
   msg \
     "${_msg[*]}"
   if [[ "${_os}" == "Android" ]]; then
-    if [[ "${_arch}" == "armv8l" ]]; then
-      _target="${_rust_target_native}"
-    elif [[ "${_arch}" == "aarch64" ]]; then
+    if [[ "${_arch}" == "aarch64" ]]; then
       _target="${_rust_target_native}"
       # _target="arm-linux-android"
     elif [[ "${_arch}" == "arm" ]]; then
-      _target="${CARCH}-linux-androideabi"
+      _target="${_rust_target_native}"
     elif [[ "${_arch}" == "armv7l" ]]; then
-      _target="${CARCH}-linux-androideabi"
+      _target="${_rust_target_native}"
+    elif [[ "${_arch}" == "armv8l" ]]; then
+      _target="${_rust_target_native}"
     elif [[ "${_arch}" == "i686" ]]; then
       _target="${_rust_target_native}"
     elif [[ "${_arch}" == "x86_64" ]]; then
