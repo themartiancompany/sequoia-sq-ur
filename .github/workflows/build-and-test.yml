@@ -154,7 +154,9 @@ jobs:
                 -m)" &&
           if [[ "${_arch}" == "armv8l" ]]; then \
             _rust="rust-std-armv7-linux-androideabi" \
-          elif [[ "${_arch}" == "armv8l" ]]; then \
+          elif [[ "${_arch}" == "x86_64" || \
+                  "${_arch}" == "i686" || \
+                  "${_arch}" == "aarch64" ]]; then \
             _rust="rust" \
           fi && \
           export \
