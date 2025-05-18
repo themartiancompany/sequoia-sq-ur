@@ -211,7 +211,7 @@ _prepare() {
             '{print $2}')"
   _msg=(
     "Rust native architecture target:"
-    "${_rust_arch_targets[*]}"
+    "${_rust_target_native}"
   )
   msg \
     "${_msg[*]}"
