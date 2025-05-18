@@ -333,7 +333,7 @@ _build() {
     _cargo_opts=() \
     _pwd
   msg \
-    "building ${_dir}."
+    "Building ${_dir}."
   _pwd="$( \
     pwd)"
   shift \
