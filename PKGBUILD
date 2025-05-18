@@ -164,24 +164,26 @@ _prepare() {
   msg \
     "Preparing ${_dir}"
   msg \
-    "Available targets ${_dir}:"
+    "Available rust Android targets:"
+  rustc \
+    --print \
+      "target-list" | \
+      grep \
+        "androideabi"
   rustc \
     --print \
       "target-list" | \
       grep \
         "androideabi"
   msg \
-    "Rust main target ${_dir}:"
+    "Available rust architecture targets:"
  pacman \
     -Ql \
     "rust" | \
     grep \
       "/usr/lib/rustlib/" | \
-      head \
-        -n 2 | \
-      tail \
-        -n \
-          1 | \
+      grep \
+        "/${CARCH}" | \
         awk \
           '{print $2}'
   _target="${CARCH}-unknown-linux-gnu"
