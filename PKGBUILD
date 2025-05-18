@@ -227,7 +227,7 @@ _prepare() {
     -depth \
       "1" | \
       grep \
-        "*/${_arch}-*"
+        "/${_arch}-"
   _rust_target_native="$( \
     basename \
       "$(find \
@@ -237,7 +237,7 @@ _prepare() {
            -depth \
              "1" | \
            grep | \
-             "*/${_arch}-*" | \
+             "/${_arch}-" | \
              head \
                -n \
                  2 | \
