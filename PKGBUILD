@@ -60,10 +60,10 @@ pkgrel=1
 pkgdesc='Command-line frontends for Sequoia'
 url="https://${_pkg}-pgp.org"
 arch=(
-  'x86_64'
   'arm'
   'aarch64'
   'i686'
+  'x86_64'
 )
 license=(
   'LGPL-2.0-or-later'
