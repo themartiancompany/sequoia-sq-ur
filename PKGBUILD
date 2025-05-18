@@ -218,14 +218,6 @@ _prepare() {
     "Available Rust architecture targets:"
     "${_rust_arch_targets[*]}"
   )
-  msg \
-    "${_msg[*]}"
-  if [[ "${_os}" == "Android" ]]; then
-    echo
-  fi
-  if [[ "${_arch}" == "arm" ]]; then
-  elif [[ "${_arch}" == "x86_64" ]]; then
-  fi
   find \
     "${_usr}/lib/rustlib"
   _rust_target_native="$( \
@@ -242,6 +234,16 @@ _prepare() {
   )
   msg \
     "${_msg[*]}"
+  msg \
+    "${_msg[*]}"
+  if [[ "${_os}" == "Android" ]]; then
+    echo
+  fi
+  if [[ "${_arch}" == "arm" ]]; then
+    echo
+  elif [[ "${_arch}" == "x86_64" ]]; then
+    echo
+  fi
   _pwd="$( \
     pwd)"
   cd \
