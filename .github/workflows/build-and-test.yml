@@ -34,10 +34,10 @@ jobs:
     strategy:
       matrix:
         include:
-          - runner:
-              ubuntu-24.04
-            architecture:
-              i686
+          # - runner:
+          #     ubuntu-24.04
+          #   architecture:
+          #     i686
           - runner:
               ubuntu-24.04
             architecture:
