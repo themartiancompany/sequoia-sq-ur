@@ -152,6 +152,10 @@ jobs:
             _arch="$( \
               uname \
                 -m)" \
+            export \
+              _arch="$( \
+                uname \
+                  -m)" && \
             /entrypoint.sh \
               echo \
                 "Architecture: ${_arch}" && \
