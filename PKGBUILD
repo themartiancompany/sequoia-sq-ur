@@ -37,9 +37,11 @@ _os="$( \
     -o)"
 if [[ "${_os}" == "Android" ]]; then
   _libc="ndk-sysroot"
+  _cargo="rust"
   _cc="clang"
 elif [[ "${_os}" == "GNU/Linux" ]]; then
   _cc="gcc"
+  _cargo="cargo"
   _libc="glibc" 
 fi
 _proj="sequoia"
@@ -84,7 +86,7 @@ depends=(
 )
 makedepends=(
   'capnproto'
-  'cargo'
+  "${_cargo}"
   "${_cc}"
 )
 options=(
