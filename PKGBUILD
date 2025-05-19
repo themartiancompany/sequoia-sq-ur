@@ -425,17 +425,17 @@ package() {
     -vDm644 \
     "target/shell-completions/_sq" \
     -t \
-    "${pkgdir_usr}/share/zsh/site-functions"
+    "${_pkgdir_usr}/share/zsh/site-functions"
   install \
     -vDm644 \
     "target/shell-completions/sq.fish" \
     -t \
-    "${pkgdir_usr}/share/fish/vendor_completions.d"
+    "${_pkgdir_usr}/share/fish/vendor_completions.d"
   install \
     -vDm644 \
     "target/man-pages/"*".1" \
     -t \
-    "${pkgdir_usr}/share/man/man1/"
+    "${_pkgdir_usr}/share/man/man1/"
 }
 
 # vim:set sw=2 sts=-1 et:

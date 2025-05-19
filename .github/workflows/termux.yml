@@ -537,6 +537,28 @@ jobs:
               -rf \
               "${HOME}/fur"
       - name:
+          Install Meson.
+        run: |
+          /entrypoint.sh \
+            fur \
+              -v \
+              -p \
+                "pacman" \
+              -d \
+              "meson"
+          /entrypoint.sh \
+            rm \
+              "${HOME}/fur/termux/any/"*".pkg.tar."*".sig"
+          /entrypoint.sh \
+            pacman \
+              -Udd \
+              --noconfirm \
+              "${HOME}/fur/termux/any/"*".pkg.tar."*
+          /entrypoint.sh \
+            rm \
+              -rf \
+              "${HOME}/fur"
+      - name:
           Setup.
         run: |
           # pkg/pip need to be prefixed with /entrypoint.sh
@@ -564,12 +586,15 @@ jobs:
           # /entrypoint.sh \
           #   pacman-key \
           #     --init
-          /entrypoint.sh \
-            pip \
-              install \
-              "meson"
-      - name: build
-        # run: touch artifact
+          # /entrypoint.sh \
+          #   pip \
+          #     install \
+          #     "meson"
+      - name:
+          Builds the package.
+        # run: |
+        #   touch \
+        #     artifact
         run: |
           # Container info:
           # /entrypoint.sh \
@@ -683,7 +708,7 @@ jobs:
       - uses:
           actions/checkout@v3.3.0
       - name:
-          build
+          Builds the package.
         run:
           touch \
             artifact
