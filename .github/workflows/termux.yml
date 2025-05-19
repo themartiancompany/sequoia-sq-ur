@@ -616,6 +616,7 @@ jobs:
           /entrypoint.sh \
             pacman \
               -Udd \
+              --noconfirm \
                 $(find \
                     "$(pwd)" \
                     -iname \
