@@ -33,6 +33,8 @@ on:
 jobs:
   # This is what is currently necessary to make termux-docker work with GHA.
   termux:
+    name:
+      Termux package build (CI).
     strategy:
       matrix:
         include:

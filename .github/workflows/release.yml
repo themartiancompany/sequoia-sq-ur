@@ -37,7 +37,7 @@ jobs:
   # This is what is currently necessary to make termux-docker work with GHA.
   termux_release:
     name:
-      termux_release
+      Releases the Life and DogeOS Android base (Termux) binary package.
     permissions: write-all
     strategy:
       matrix:
