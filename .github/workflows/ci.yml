@@ -736,3 +736,70 @@ jobs:
             artifact
           path:
             artifact
+  arch:
+    name:
+      Life and DogeOS GNU Base package build (Arch CI).
+    strategy:
+      matrix:
+        include:
+          - runner:
+              ubuntu-24.04-arm
+            architecture:
+              aarch64
+          # Upstream issue
+          # https://gitlab.com/sequoia-pgp/pgp-cert-d/-/issues/54
+          # - runner:
+          #     ubuntu-24.04
+          #   architecture:
+          #     i686
+          # - runner:
+          #     ubuntu-24.04-arm
+          #   architecture:
+          #     arm
+          - runner:
+              ubuntu-24.04
+            architecture:
+              x86_64
+    runs-on:
+      ${{ matrix.runner }}
+    # prepare writable volume prefix mount
+    # for actions/upload-artifact,
+    # based on the higher-profile workaround
+    # for 32-bit GNU/Linux containers explained here
+    # https://github.com/actions/upload-artifact/issues/616#issuecomment-2350667347
+    container:
+      image:
+        archlinux/archlinux-docker:${{ matrix.architecture }}
+      volumes: 
+        - /tmp/node20:/__e/node20
+    # approximate environment variables for actions
+    # that can't be forced to use entrypoint.sh
+    env:
+      # TERMUX_MAIN_PACKAGE_FORMAT:
+      #   debian
+      # ANDROID_ROOT:
+      #   /system
+      # ANDROID_DATA:
+      #   /data
+      # PREFIX:
+      #   /data/data/com.termux/files/usr
+      # HOME:
+      #   /data/data/com.termux/files/home
+      # PATH:
+      #   /data/data/com.termux/files/usr/bin
+      # TMPDIR:
+      #   /data/data/com.termux/files/usr/tmp
+      LANG:
+        en_US.UTF-8
+      TZ:
+        UTC
+    steps:
+      - name:
+          Say hello from the container.
+        run: |
+          echo \
+            "${HOME}"
+          # ln \
+          #   -sf \
+          #   "${PREFIX}/etc/termux/mirrors/default" \
+          #   "${PREFIX}/etc/termux/chosen_mirrors"
