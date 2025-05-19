@@ -29,6 +29,8 @@ name:
   release
 run-name:
   Releases Life and DogeOS packages (CI).
+permissions:
+  write-all
 
 on:
   push:
@@ -40,7 +42,6 @@ jobs:
   termux_release:
     name:
       Releases the Life and DogeOS Android base (Termux) binary package.
-    permissions: write-all
     strategy:
       matrix:
         include:
