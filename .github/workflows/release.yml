@@ -38,6 +38,7 @@ jobs:
   termux_release:
     name:
       termux_release
+    permissions: write-all
     strategy:
       matrix:
         include:
@@ -91,7 +92,7 @@ jobs:
         UTC
     steps:
       - name:
-          Set pkg command to use the packages-cf.termux.dev mirror.
+          Set 'pkg' command to use the packages-cf.termux.dev mirror.
         run: |
           ln \
             -sf \
