@@ -771,7 +771,7 @@ jobs:
     # https://github.com/actions/upload-artifact/issues/616#issuecomment-2350667347
     container:
       image:
-        archlinux/base-devel:${{ matrix.architecture }}
+        archlinux:base-devel
       volumes: 
         - /tmp/node20:/__e/node20
     # approximate environment variables for actions
