@@ -27,7 +27,7 @@
 
 # empty name
 name:
-  ' '
+  ci
 run-name:
   Builds Life and DogeOS packages (CI).
 on:
