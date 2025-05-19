@@ -767,8 +767,8 @@ jobs:
             -Sy \
             --noconfirm \
             tree
-      - uses:
-          actions/checkout@v4.2.2
+      # - uses:
+      #     actions/checkout@v4.2.2
       # - name:
       #     Show content of the current directory.
       #   run: |
@@ -798,8 +798,8 @@ jobs:
               "f" \
             -name \
               "PKGBUILD" 2>/dev/null
-      - uses:
-          actions/checkout@v4.2.2
+      # - uses:
+      #     actions/checkout@v4.2.2
 
   # This is the ideal way termux-docker would work with GHA.
   broken-ideal:
