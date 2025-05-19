@@ -799,7 +799,9 @@ jobs:
       - name:
           Say hello from the container.
         run: |
-          pacman -Sy 
+          pacman \
+            -Sy \
+            tree
           printf \
             "%s\n" \
             "Home: '${HOME}'." \
@@ -817,7 +819,7 @@ jobs:
         run: |
           ls \
             "$(pwd)"
-          tree /
+          tree "/"
           find \
             "/" \
             
