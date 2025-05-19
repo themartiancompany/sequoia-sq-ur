@@ -927,7 +927,7 @@ jobs:
         run: |
           su \
             -c \
-            "git clone 'https://github.com/themartiancompany/sequoia-sq-ur' '/home/user/sequoia-sq'" - \
+              "git clone 'https://github.com/themartiancompany/sequoia-sq-ur' '/home/user/sequoia-sq'" - \
             user
       - name:
           Builds the package.
