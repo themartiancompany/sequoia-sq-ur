@@ -1,7 +1,7 @@
 # SPDX-License-Identifier: AGPL-3.0
 
 #
-#    termux.yaml
+#    release.yaml
 #
 #    ----------------------------------------------------------------------
 #    Copyright © 2024, 2025 Guilherme Janczak,
@@ -25,14 +25,19 @@
 #    along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 
-name: ' ' # empty name
+name:
+  release # empty name
+
 on:
-  [push,
-   pull_request]
+  push:
+    tags:
+      - '*'
 
 jobs:
   # This is what is currently necessary to make termux-docker work with GHA.
-  termux:
+  termux_release:
+    name:
+      termux_release
     strategy:
       matrix:
         include:
@@ -663,29 +668,59 @@ jobs:
                     "$(pwd)" \
                     -iname \
                       "*.pkg.tar.*")
-      - uses:
-          actions/upload-artifact@v4.6.0
+      - name:
+          version
+        run: |
+          echo \
+            "::set-output name=version::$( \
+            recipe-get \
+              "PKGBUILD" \
+              "pkgver")"
+        id:
+          version
+      - name:
+          release
+        uses:
+          actions/create-release@v1
+        id:
+          create_release
         with:
-          name:
-            artifact-${{ matrix.architecture }}
-          path:
-            sequoia-sq-1.3.1-1-${{ matrix.architecture }}.pkg.tar.xz
-      # - name:
-      #     Upload Termux package.
-      #   uses:
-      #     actions/upload-release-asset@v1
-      #   env:
-      #     GITHUB_TOKEN:
-      #       ${{ github.token }}
+          draft:
+            false
+          prerelease:
+            false
+          release_name:
+            ${{ steps.version.outputs.version }}
+          tag_name:
+            ${{ github.ref }}
+          body_path:
+            README.md
+        env:
+          GITHUB_TOKEN:
+            ${{ github.token }}
+      # - uses:
+      #     actions/upload-artifact@v4.6.0
       #   with:
-      #     upload_url:
-      #       ${{ steps.termux.outputs.upload_url }}
-      #     asset_path:
+      #     name:
+      #       artifact-${{ matrix.architecture }}
+      #     path:
       #       sequoia-sq-1.3.1-1-${{ matrix.architecture }}.pkg.tar.xz
-      #     asset_name:
-      #       sequoia-sq-1.3.1-1-${{ matrix.architecture }}.pkg.tar.xz
-      #     asset_content_type:
-      #       application/gzip
+      - name:
+          Upload Termux package.
+        uses:
+          actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN:
+            ${{ github.token }}
+        with:
+          upload_url:
+            ${{ steps.termux.outputs.upload_url }}
+          asset_path:
+            sequoia-sq-1.3.1-1-${{ matrix.architecture }}.pkg.tar.xz
+          asset_name:
+            sequoia-sq-1.3.1-1-${{ matrix.architecture }}.pkg.tar.xz
+          asset_content_type:
+            application/gzip
 
   # This is the ideal way termux-docker would work with GHA.
   broken-ideal:
