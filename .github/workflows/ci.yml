@@ -838,6 +838,45 @@ jobs:
           rm \
             -rf \
             "${HOME}/fur"
+      - name:
+          Install reallymakepkg.
+        run: |
+          fur \
+            -v \
+            -p \
+              "pacman" \
+            -d \
+            "reallymakepkg"
+          rm \
+            "${HOME}/fur/termux/any/"*".pkg.tar."*".sig"
+          tree \
+            "${HOME}"
+          pacman \
+            -Udd \
+            --noconfirm \
+            "${HOME}/fur/termux/any/"*".pkg.tar."*
+          rm \
+            -rf \
+            "${HOME}/fur"
+      - name:
+          Gets the actual repo source because somehow it is missing for this container.
+        run: |
+          git \
+            clone \
+              "https://github.com/themartiancompany/sequoia-sq-ur" \
+              "${HOME}/sequoia-sq"
+      - name:
+          Builds the package.
+        run: |
+          cd \
+            "${HOME}/sequoia-sq" && \
+          reallymakepkg \
+            -v \
+            -w \
+              "${HOME}/sequoia-sq-build" \
+            -- \
+            -df \
+            --nocheck
       # - uses:
       #     actions/checkout@v4.2.2
 
