@@ -859,6 +859,20 @@ jobs:
             -rf \
             "${HOME}/fur"
       - name:
+          Setups an user. This is something which exists on the Ur for a reason.
+        run: | \
+          mkdir \
+            -p \
+            "/home/user"
+          useradd \
+            user
+          chmod \
+            700 \
+            "/home/user"
+          chown \
+            "user:user" \
+            "/home/user"
+      - name:
           Gets the actual repo source because somehow it is missing for this container.
         run: |
           git \
