@@ -793,12 +793,12 @@ jobs:
             -L \
               2 \
             "/"
-          find \
-            "/" \
-            -type \
-              "f" \
-            -name \
-              "PKGBUILD" 2>/dev/null
+          # find \
+          #   "/" \
+          #   -type \
+          #     "f" \
+          #   -name \
+          #     "PKGBUILD"
       - name:
           Install Crash Bash Library.
         run: |
