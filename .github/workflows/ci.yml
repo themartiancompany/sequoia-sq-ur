@@ -799,9 +799,16 @@ jobs:
       - name:
           Say hello from the container.
         run: |
-          echo \
-            "${HOME}"
-          # ln \
-          #   -sf \
-          #   "${PREFIX}/etc/termux/mirrors/default" \
-          #   "${PREFIX}/etc/termux/chosen_mirrors"
+          printf \
+            "%s\n"
+            "Home: '${HOME}'." \
+            "Current directory: '$(pwd)'."
+      - name:
+          Show content of the current directory.
+        run: |
+          ls \
+            "$(pwd)"
+      - name:
+          Show current user.
+        run: |
+          id
