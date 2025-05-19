@@ -801,6 +801,7 @@ jobs:
         run: |
           pacman \
             -Sy \
+            --noconfirm \
             tree
           printf \
             "%s\n" \
