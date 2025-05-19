@@ -935,6 +935,7 @@ jobs:
         run: |
           pacman \
             -S \
+              --noconfirm \
             $(recipe-get \
                 "/home/user/lur/sequoia-sq/PKGBUILD" \
                 "makedepends")
