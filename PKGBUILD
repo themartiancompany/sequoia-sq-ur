@@ -405,7 +405,7 @@ package() {
       -o)"
   if [[ "${_os}" == "Android" ]]; then
     if [[ ! -v "TERMUX_VERSION" ]]; then
-    _pkgdir_usr="${pkgdir}/${_usr}"
+    _pkgdir_usr="${pkgdir}${_usr}"
     elif [[ -v "TERMUX_VERSION" ]]; then
     _pkgdir_usr="${pkgdir}/usr"
     fi
@@ -420,7 +420,7 @@ package() {
   install \
     -vDm644 \
     "target/shell-completions/sq.bash" \
-    "${pkg_dir}/share/bash-completion/completions/sq"
+    "${_pkgdir_usr}/share/bash-completion/completions/sq"
   install \
     -vDm644 \
     "target/shell-completions/_sq" \
