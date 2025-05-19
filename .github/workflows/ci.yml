@@ -834,7 +834,7 @@ jobs:
           pacman \
             -Udd \
             --noconfirm \
-            "${HOME}/fur/termux/any/"*".pkg.tar."*
+            "${HOME}/fur/arch/any/"*".pkg.tar."*
           rm \
             -rf \
             "${HOME}/fur"
