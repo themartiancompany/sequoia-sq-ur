@@ -396,26 +396,26 @@ check() {
 package() {
   install \
     -vDm755 \
-    target/release/sq \
+    "target/release/sq" \
     -t \
     "${pkgdir}/usr/bin"
   install \
     -vDm644 \
-    target/shell-completions/sq.bash \
+    "target/shell-completions/sq.bash" \
     "${pkgdir}/usr/share/bash-completion/completions/sq"
   install \
     -vDm644 \
-    target/shell-completions/_sq \
+    "target/shell-completions/_sq" \
     -t \
     "${pkgdir}/usr/share/zsh/site-functions"
   install \
     -vDm644 \
-    target/shell-completions/sq.fish \
+    "target/shell-completions/sq.fish" \
     -t \
     "${pkgdir}/usr/share/fish/vendor_completions.d"
   install \
     -vDm644 \
-    target/man-pages/*.1 \
+    "target/man-pages/"*".1" \
     -t \
     "${pkgdir}/usr/share/man/man1/"
 }
