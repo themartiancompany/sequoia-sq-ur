@@ -610,7 +610,9 @@ jobs:
             echo \
               "${HOME}"
           find \
-            "$(pwd)"
+            "$(pwd)" | \
+            grep \
+              ".pkg.tar."
       - uses:
           actions/upload-artifact@v4.6.0
         with:
