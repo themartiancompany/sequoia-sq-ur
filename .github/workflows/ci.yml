@@ -767,6 +767,7 @@ jobs:
           pacman \
             -Sy \
             --noconfirm \
+            git \
             tree
       # - uses:
       #     actions/checkout@v4.2.2
