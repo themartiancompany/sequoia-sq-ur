@@ -860,7 +860,7 @@ jobs:
             "${HOME}/fur"
       - name:
           Setups an user. This is something which exists on the Ur for a reason.
-        run: | \
+        run: |
           mkdir \
             -p \
             "/home/user"
