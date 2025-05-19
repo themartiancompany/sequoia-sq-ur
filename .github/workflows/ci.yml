@@ -913,7 +913,7 @@ jobs:
         run: |
           mkdir \
             -p \
-            "/home/user"
+            "/home/user/lur"
           useradd \
             user
           chmod \
@@ -927,7 +927,7 @@ jobs:
         run: |
           su \
             -c \
-              "git clone 'https://github.com/themartiancompany/sequoia-sq-ur' '/home/user/sequoia-sq'" - \
+              "git clone 'https://github.com/themartiancompany/sequoia-sq-ur' '/home/user/lur/sequoia-sq'" - \
             user
       - name:
           Builds the package.
@@ -938,14 +938,7 @@ jobs:
             -u \
               "user" \
             -c \
-            "cd /home/user/sequoia-sq && \
-               reallymakepkg \
-              -v \
-              -w \
-                '/home/user/sequoia-sq-build' \
-              -- \
-              -df \
-              --nocheck
+            "cd /home/user/lur/sequoia-sq reallymakepkg -v -w '/home/user/sequoia-sq-build' -- -df --nocheck"
       # - uses:
       #     actions/checkout@v4.2.2
 
