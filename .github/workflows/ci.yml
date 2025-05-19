@@ -931,6 +931,14 @@ jobs:
               "git clone 'https://github.com/themartiancompany/sequoia-sq-ur' '/home/user/lur/sequoia-sq'" - \
             user
       - name:
+          Install build dependencies.
+        run: |
+          su \
+            -c \
+              "cd /home/user/lur/sequoia-sq && pacman -S $(recipe-get "PKGBUILD" "makedepends")" - \
+            "user"
+
+      - name:
           Builds the package.
         run: |
           su \
