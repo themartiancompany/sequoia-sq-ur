@@ -30,7 +30,8 @@ name:
 run-name:
   Releases Life and DogeOS packages (CI).
 permissions:
-  write-all
+  contents:
+    write
 
 on:
   push:
