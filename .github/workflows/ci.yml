@@ -811,7 +811,7 @@ jobs:
               "https://github.com/themartiancompany/fur" \
               "${HOME}/fur"
           rm \
-            "${HOME}/fur/termux/any/"*".pkg.tar."*".sig"
+            "${HOME}/fur/arch/any/"*".pkg.tar."*".sig"
           pacman \
             -Udd \
             --noconfirm \
@@ -830,7 +830,7 @@ jobs:
               "https://github.com/themartiancompany/fur" \
               "${HOME}/fur"
           rm \
-            "${HOME}/fur/termux/any/"*".pkg.tar."*".sig"
+            "${HOME}/fur/arch/any/"*".pkg.tar."*".sig"
           pacman \
             -Udd \
             --noconfirm \
@@ -848,13 +848,13 @@ jobs:
             -d \
             "reallymakepkg"
           rm \
-            "${HOME}/fur/termux/any/"*".pkg.tar."*".sig"
+            "${HOME}/fur/arch/any/"*".pkg.tar."*".sig"
           tree \
             "${HOME}"
           pacman \
             -Udd \
             --noconfirm \
-            "${HOME}/fur/termux/any/"*".pkg.tar."*
+            "${HOME}/fur/arch/any/"*".pkg.tar."*
           rm \
             -rf \
             "${HOME}/fur"
