@@ -612,18 +612,14 @@ jobs:
           find \
             "$(pwd)" \
             -iname \
-              "*.pkg.tar.*" \
-            -depth \
-              1
+              "*.pkg.tar.*"
           /entrypoint.sh \
             pacman \
               -Udd \
                 $(find \
                     "$(pwd)" \
                     -iname \
-                      "*.pkg.tar.*" \
-                    -depth \
-                      1)"
+                      "*.pkg.tar.*")"
       - uses:
           actions/upload-artifact@v4.6.0
         with:
