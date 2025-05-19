@@ -810,9 +810,12 @@ jobs:
             "Contents of the directory '$(pwd)':"
           ls \
             "$(pwd)"
-          tree /
-          find \
+          tree \
+            -L \
+              2 \
             "/"
+          # find \
+          #   "/" 
       - uses:
           actions/checkout@v3.3.0
       - name:
