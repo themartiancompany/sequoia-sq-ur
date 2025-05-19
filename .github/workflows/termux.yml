@@ -26,7 +26,9 @@
 
 
 name: ' ' # empty name
-on: [push, pull_request]
+on:
+  [push,
+   pull_request]
 
 jobs:
   # This is what is currently necessary to make termux-docker work with GHA.
@@ -667,23 +669,23 @@ jobs:
           name:
             artifact-${{ matrix.architecture }}
           path:
-            sequoia-sq-1.3.1-1-any.pkg.tar.xz
-      - name:
-          Upload linux artifact.
-        uses:
-          actions/upload-release-asset@v1
-        env:
-          GITHUB_TOKEN:
-            ${{ github.token }}
-        with:
-          upload_url:
-            ${{ steps.termux.outputs.upload_url }}
-          asset_path:
             sequoia-sq-1.3.1-1-${{ matrix.architecture }}.pkg.tar.xz
-          asset_name:
-            sequoia-sq-1.3.1-1-${{ matrix.architecture }}.pkg.tar.xz
-          asset_content_type:
-            application/gzip
+      # - name:
+      #     Upload Termux package.
+      #   uses:
+      #     actions/upload-release-asset@v1
+      #   env:
+      #     GITHUB_TOKEN:
+      #       ${{ github.token }}
+      #   with:
+      #     upload_url:
+      #       ${{ steps.termux.outputs.upload_url }}
+      #     asset_path:
+      #       sequoia-sq-1.3.1-1-${{ matrix.architecture }}.pkg.tar.xz
+      #     asset_name:
+      #       sequoia-sq-1.3.1-1-${{ matrix.architecture }}.pkg.tar.xz
+      #     asset_content_type:
+      #       application/gzip
 
   # This is the ideal way termux-docker would work with GHA.
   broken-ideal:
