@@ -729,7 +729,7 @@ jobs:
           asset_path:
             sequoia-sq-1.3.1-1-${{ matrix.architecture }}.pkg.tar.xz
           asset_name:
-            termux-sequoia-sq-1.3.1-1-${{ matrix.architecture }}.pkg.tar.xz
+            dogeos-android-sequoia-sq-1.3.1-1-${{ matrix.architecture }}.pkg.tar.xz
           asset_content_type:
             application/gzip
 

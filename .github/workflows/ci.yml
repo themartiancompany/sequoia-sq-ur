@@ -29,7 +29,7 @@
 name:
   ci
 run-name:
-  Builds Life and DogeOS packages (CI).
+  Builds DogeOS packages (CI).
 on:
   [push,
    pull_request]
@@ -799,15 +799,30 @@ jobs:
       - name:
           Say hello from the container.
         run: |
+          pacman -Sy 
           printf \
             "%s\n" \
             "Home: '${HOME}'." \
             "Current directory: '$(pwd)'."
+            "Contents of the directory '$(pwd)':"
+          ls \
+            "$(pwd)"
+          tree /
+          find \
+            "/" \
+
+      - uses:
+          actions/checkout@v3.3.0
+
       - name:
           Show content of the current directory.
         run: |
           ls \
             "$(pwd)"
+          tree /
+          find \
+            "/" \
+            
       - name:
           Show current user.
         run: |
