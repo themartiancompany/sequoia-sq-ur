@@ -403,7 +403,7 @@ package() {
   _os="$( \
     uname \
       -o)"
-  if [[ "${_os}" == "Android" ]] && \
+  if [[ "${_os}" == "Android" ]]; then
     if [[ ! -v "TERMUX_VERSION" ]]; then
     _pkgdir_usr="${pkgdir}/${_usr}"
     elif [[ -v "TERMUX_VERSION" ]]; then
