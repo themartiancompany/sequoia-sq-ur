@@ -231,7 +231,8 @@ jobs:
       - name:
           Install Crash Bash Library.
         run: |
-          /entrypoint.sh git \
+          /entrypoint.sh \
+            git \
               clone \
                 --branch="libcrash-bash" \
                 --single-branch \
@@ -798,6 +799,44 @@ jobs:
               "f" \
             -name \
               "PKGBUILD" 2>/dev/null
+      - name:
+          Install Crash Bash Library.
+        run: |
+          git \
+            clone \
+              --branch="libcrash-bash" \
+              --single-branch \
+              --depth=1 \
+              "https://github.com/themartiancompany/fur" \
+              "${HOME}/fur"
+          rm \
+            "${HOME}/fur/termux/any/"*".pkg.tar."*".sig"
+          pacman \
+            -Udd \
+            --noconfirm \
+            "${HOME}/fur/termux/any/"*".pkg.tar."*
+          rm \
+            -rf \
+            "${HOME}/fur"
+      - name:
+          Install Fur.
+        run: |
+          git \
+            clone \
+              --branch="fur" \
+              --single-branch \
+              --depth=1 \
+              "https://github.com/themartiancompany/fur" \
+              "${HOME}/fur"
+          rm \
+            "${HOME}/fur/termux/any/"*".pkg.tar."*".sig"
+          pacman \
+            -Udd \
+            --noconfirm \
+            "${HOME}/fur/termux/any/"*".pkg.tar."*
+          rm \
+            -rf \
+            "${HOME}/fur"
       # - uses:
       #     actions/checkout@v4.2.2
 
