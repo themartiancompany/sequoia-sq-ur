@@ -34,7 +34,7 @@ jobs:
   # This is what is currently necessary to make termux-docker work with GHA.
   termux:
     name:
-      Termux package build (CI).
+      Life and DogeOS Android Base package build (Termux CI).
     strategy:
       matrix:
         include:
