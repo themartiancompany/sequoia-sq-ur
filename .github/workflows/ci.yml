@@ -29,7 +29,7 @@
 name:
   ci
 run-name:
-  Builds DogeOS packages (CI).
+  Builds Life and DogeOS packages (CI).
 on:
   [push,
    pull_request]
