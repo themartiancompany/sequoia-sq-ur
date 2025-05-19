@@ -608,11 +608,22 @@ jobs:
               --nocheck
           /entrypoint.sh \
             echo \
-              "${HOME}"
+              "Home: ${HOME}"
           find \
-            "$(pwd)" | \
-            grep \
-              ".pkg.tar."
+            "$(pwd)" \
+            -iname \
+              "*.pkg.tar.*" \
+            -depth \
+              1
+          /entrypoint.sh \
+            pacman \
+              -Udd \
+                $(find \
+                    "$(pwd)" \
+                    -iname \
+                      "*.pkg.tar.*" \
+                    -depth \
+                      1)"
       - uses:
           actions/upload-artifact@v4.6.0
         with:
