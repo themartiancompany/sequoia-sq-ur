@@ -806,7 +806,7 @@ jobs:
           printf \
             "%s\n" \
             "Home: '${HOME}'." \
-            "Current directory: '$(pwd)'."
+            "Current directory: '$(pwd)'." \
             "Contents of the directory '$(pwd)':"
           ls \
             "$(pwd)"
