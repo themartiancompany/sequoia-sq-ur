@@ -920,6 +920,7 @@ jobs:
             700 \
             "/home/user"
           chown \
+            -R \
             "user:user" \
             "/home/user"
       - name:
