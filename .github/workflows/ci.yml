@@ -814,8 +814,12 @@ jobs:
             -L \
               2 \
             "/"
-          # find \
-          #   "/" 
+          find \
+            "/" \
+            -type \
+              "f" \
+            -name \
+              "PKGBUILD" 2>/dev/null
       - uses:
           actions/checkout@v3.3.0
       - name:
