@@ -25,8 +25,11 @@
 #    along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 
-name: ' ' # empty name
-run-name: Builds Life and DogeOS package (CI).
+# empty name
+name:
+  ' '
+run-name:
+  Builds Life and DogeOS packages (CI).
 on:
   [push,
    pull_request]

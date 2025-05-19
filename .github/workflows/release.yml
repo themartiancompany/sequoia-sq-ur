@@ -26,7 +26,10 @@
 
 
 name:
-  release # empty name
+  release
+run-name:
+  Releases Life and DogeOS packages (CI).
+
 
 on:
   push:
