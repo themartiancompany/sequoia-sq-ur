@@ -26,6 +26,7 @@
 
 
 name: ' ' # empty name
+run-name: Builds Life and DogeOS package (CI).
 on:
   [push,
    pull_request]
