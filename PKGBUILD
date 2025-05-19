@@ -336,7 +336,12 @@ _build() {
   local \
     _dir="${1}" \
     _cargo_opts=() \
-    _pwd
+    _pwd \
+    _cc
+  _cc="$( \
+    command \
+      -v \
+      "cc")"
   msg \
     "Building ${_dir}."
   _pwd="$( \
@@ -352,7 +357,8 @@ _build() {
   export \
     CARGO_TARGET_DIR="../target" \
     RUSTUP_TOOLCHAIN="stable" \
-    ASSET_OUT_DIR="../target"
+    ASSET_OUT_DIR="../target" \
+    CC="${_cc}"
   # NOTE:
   #   we select specific (default) features,
   #   as there are multiple crypto backends
