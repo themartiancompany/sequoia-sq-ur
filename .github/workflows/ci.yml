@@ -935,7 +935,7 @@ jobs:
         run: |
           su \
             -c \
-              "cd /home/user/lur/sequoia-sq reallymakepkg -v -w '/home/user/sequoia-sq-build' -- -df --nocheck" - \
+              "cd /home/user/lur/sequoia-sq && reallymakepkg -v -w '/home/user/sequoia-sq-build' -- -df --nocheck" - \
             "user"
       # - uses:
       #     actions/checkout@v4.2.2
