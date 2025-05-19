@@ -539,8 +539,8 @@ jobs:
       - name:
           Setup.
         run: |
-          # pkg/pip need to be prefixed with /entrypoint.sh because GHA overrode
-          # the entrypoint.
+          # pkg/pip need to be prefixed with /entrypoint.sh
+          # because GHA overrode the entrypoint.
           /entrypoint.sh \
             pkg \
               install \
