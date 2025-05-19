@@ -700,42 +700,6 @@ jobs:
       #     asset_content_type:
       #       application/gzip
 
-  # This is the ideal way termux-docker would work with GHA.
-  broken-ideal:
-    if:
-      false
-    runs-on:
-      ubuntu-latest
-    container:
-      termux/termux-docker:x86_64
-    steps:
-      - name:
-          setup
-        run: |
-          pkg \
-            install \
-              -y \
-              "ninja" \
-              "clang" \
-          pip \
-            install \
-            "meson"
-      - uses:
-          actions/checkout@v3.3.0
-      - name:
-          Builds the package.
-        run:
-          touch \
-            artifact
-      - uses:
-          actions/upload-artifact@v3.1.2
-        if:
-          always()
-        with:
-          name:
-            artifact
-          path:
-            artifact
   arch:
     name:
       Life and DogeOS GNU Base package build (Arch CI).
@@ -797,14 +761,28 @@ jobs:
         UTC
     steps:
       - name:
-          Say hello from the container.
+          Setup container.
         run: |
           pacman \
             -Sy \
             --noconfirm \
             tree
+      - uses:
+          actions/checkout@v4.2.2
+      # - name:
+      #     Show content of the current directory.
+      #   run: |
+      #     ls \
+      #       "$(pwd)"
+      #     tree "/"
+      #     find \
+      #       "/" \
+      - name:
+          Show info.
+        run: |
           printf \
             "%s\n" \
+            "ID: '$(id)'." \
             "Home: '${HOME}'." \
             "Current directory: '$(pwd)'." \
             "Contents of the directory '$(pwd)':"
@@ -821,17 +799,43 @@ jobs:
             -name \
               "PKGBUILD" 2>/dev/null
       - uses:
+          actions/checkout@v4.2.2
+
+  # This is the ideal way termux-docker would work with GHA.
+  broken-ideal:
+    name:
+      Runs if build fails.
+    if:
+      false
+    runs-on:
+      ubuntu-latest
+    container:
+      termux/termux-docker:x86_64
+    steps:
+      - name:
+          setup
+        run: |
+          pkg \
+            install \
+              -y \
+              "ninja" \
+              "clang" \
+          pip \
+            install \
+            "meson"
+      - uses:
           actions/checkout@v3.3.0
       - name:
-          Show content of the current directory.
-        run: |
-          ls \
-            "$(pwd)"
-          tree "/"
-          find \
-            "/" \
-            
-      - name:
-          Show current user.
-        run: |
-          id
+          Builds the package.
+        run:
+          touch \
+            artifact
+      - uses:
+          actions/upload-artifact@v3.1.2
+        if:
+          always()
+        with:
+          name:
+            artifact
+          path:
+            artifact
