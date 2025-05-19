@@ -192,6 +192,11 @@ _prepare() {
   _rust_native_target=""
   _usr="$( \
     _usr_get)"
+  _msg=(
+    "Detected 'usr' directory '${_usr}'."
+  )
+  msg \
+    "${_msg[*]}"
   _arch="$( \
     uname \
       -m)"
