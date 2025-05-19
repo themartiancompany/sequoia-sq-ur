@@ -517,7 +517,7 @@ jobs:
               -p \
                 "pacman" \
               -d \
-              "lur"
+              "aspe"
           /entrypoint.sh \
             rm \
               "${HOME}/fur/termux/any/"*".pkg.tar."*".sig"
@@ -859,6 +859,46 @@ jobs:
             -rf \
             "${HOME}/fur"
       - name:
+          Install Aspe.
+        run: |
+          /entrypoint.sh \
+            fur \
+              -v \
+              -p \
+                "pacman" \
+              -d \
+              "aspe"
+          /entrypoint.sh \
+            rm \
+              "${HOME}/fur/arch/any/"*".pkg.tar."*".sig"
+          /entrypoint.sh \
+            pacman \
+              -Udd \
+              --noconfirm \
+              "${HOME}/fur/arch/any/"*".pkg.tar."*
+          /entrypoint.sh \
+            rm \
+              -rf \
+              "${HOME}/fur"
+      - name:
+          Install Lur.
+        run: |
+          fur \
+            -v \
+            -p \
+              "pacman" \
+            -d \
+            "lur"
+          rm \
+            "${HOME}/fur/arch/any/"*".pkg.tar."*".sig"
+          pacman \
+            -Udd \
+            --noconfirm \
+            "${HOME}/fur/arch/any/"*".pkg.tar."*
+          rm \
+            -rf \
+            "${HOME}/fur"
+      - name:
           Setups an user. This is something which exists on the Ur for a reason.
         run: |
           mkdir \
@@ -875,22 +915,31 @@ jobs:
       - name:
           Gets the actual repo source because somehow it is missing for this container.
         run: |
-          git \
-            clone \
-              "https://github.com/themartiancompany/sequoia-sq-ur" \
-              "${HOME}/sequoia-sq"
+          su \
+            -u \
+              "user" \
+            -c \
+            git \
+              clone \
+                "https://github.com/themartiancompany/sequoia-sq-ur" \
+                "/home/user/sequoia-sq"
       - name:
           Builds the package.
         run: |
           cd \
             "${HOME}/sequoia-sq" && \
-          reallymakepkg \
-            -v \
-            -w \
-              "${HOME}/sequoia-sq-build" \
-            -- \
-            -df \
-            --nocheck
+          su \
+            -u \
+              "user" \
+            -c \
+            "cd /home/user/sequoia-sq && \
+               reallymakepkg \
+              -v \
+              -w \
+                '/home/user/sequoia-sq-build' \
+              -- \
+              -df \
+              --nocheck
       # - uses:
       #     actions/checkout@v4.2.2
 
