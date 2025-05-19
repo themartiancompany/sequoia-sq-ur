@@ -30,7 +30,6 @@ name:
 run-name:
   Releases Life and DogeOS packages (CI).
 
-
 on:
   push:
     tags:
