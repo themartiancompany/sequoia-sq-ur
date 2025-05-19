@@ -839,12 +839,30 @@ jobs:
             -rf \
             "${HOME}/fur"
       - name:
-          Install reallymakepkg.
+          Install inteppacman.
         run: |
           fur \
             -v \
             -p \
               "pacman" \
+            -d \
+            "inteppacman"
+          rm \
+            "${HOME}/fur/arch/any/"*".pkg.tar."*".sig"
+          tree \
+            "${HOME}"
+          pacman \
+            -Udd \
+            --noconfirm \
+            "${HOME}/fur/arch/any/"*".pkg.tar."*
+          rm \
+            -rf \
+            "${HOME}/fur"
+      - name:
+          Install reallymakepkg.
+        run: |
+          fur \
+            -v \
             -d \
             "reallymakepkg"
           rm \
@@ -861,32 +879,24 @@ jobs:
       - name:
           Install Aspe.
         run: |
-          /entrypoint.sh \
-            fur \
-              -v \
-              -p \
-                "pacman" \
-              -d \
-              "aspe"
-          /entrypoint.sh \
-            rm \
-              "${HOME}/fur/arch/any/"*".pkg.tar."*".sig"
-          /entrypoint.sh \
-            pacman \
-              -Udd \
-              --noconfirm \
-              "${HOME}/fur/arch/any/"*".pkg.tar."*
-          /entrypoint.sh \
-            rm \
-              -rf \
-              "${HOME}/fur"
+          fur \
+            -v \
+            -d \
+            "aspe"
+          rm \
+            "${HOME}/fur/arch/any/"*".pkg.tar."*".sig"
+          pacman \
+            -Udd \
+            --noconfirm \
+            "${HOME}/fur/arch/any/"*".pkg.tar."*
+          rm \
+            -rf \
+            "${HOME}/fur"
       - name:
           Install Lur.
         run: |
           fur \
             -v \
-            -p \
-              "pacman" \
             -d \
             "lur"
           rm \
