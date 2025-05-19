@@ -933,11 +933,11 @@ jobs:
       - name:
           Install build dependencies.
         run: |
-          su \
-            -c \
-              "cd /home/user/lur/sequoia-sq && pacman -S $(recipe-get "PKGBUILD" "makedepends")" - \
-            "user"
-
+          pacman \
+            -S \
+            $(recipe-get \
+                "/home/user/lur/sequoia-sq/PKGBUILD" \
+                "makedepends")
       - name:
           Builds the package.
         run: |
