@@ -394,30 +394,48 @@ check() {
 }
 
 package() {
+  local \
+    _os \
+    _pkgdir_usr \
+    _usr
+  _usr="$( \
+    _usr_get)"
+  _os="$( \
+    uname \
+      -o)"
+  if [[ "${_os}" == "Android" ]] && \
+    if [[ ! -v "TERMUX_VERSION" ]]; then
+    _pkgdir_usr="${pkgdir}/${_usr}"
+    elif [[ -v "TERMUX_VERSION" ]]; then
+    _pkgdir_usr="${pkgdir}/usr"
+    fi
+  elif [[ "${_os}" == "GNU/Linux" ]]; then
+    _pkgdir_usr="${pkgdir}/usr"
+  fi
   install \
     -vDm755 \
     "target/release/sq" \
     -t \
-    "${pkgdir}/usr/bin"
+    "${_pkgdir_usr}/bin"
   install \
     -vDm644 \
     "target/shell-completions/sq.bash" \
-    "${pkgdir}/usr/share/bash-completion/completions/sq"
+    "${pkg_dir}/share/bash-completion/completions/sq"
   install \
     -vDm644 \
     "target/shell-completions/_sq" \
     -t \
-    "${pkgdir}/usr/share/zsh/site-functions"
+    "${pkgdir_usr}/share/zsh/site-functions"
   install \
     -vDm644 \
     "target/shell-completions/sq.fish" \
     -t \
-    "${pkgdir}/usr/share/fish/vendor_completions.d"
+    "${pkgdir_usr}/share/fish/vendor_completions.d"
   install \
     -vDm644 \
     "target/man-pages/"*".1" \
     -t \
-    "${pkgdir}/usr/share/man/man1/"
+    "${pkgdir_usr}/share/man/man1/"
 }
 
 # vim:set sw=2 sts=-1 et:
