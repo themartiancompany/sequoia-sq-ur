@@ -800,7 +800,7 @@ jobs:
           Say hello from the container.
         run: |
           printf \
-            "%s\n"
+            "%s\n" \
             "Home: '${HOME}'." \
             "Current directory: '$(pwd)'."
       - name:
