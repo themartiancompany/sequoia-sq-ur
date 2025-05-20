@@ -44,6 +44,8 @@ jobs:
         include:
           - runner:
               ubuntu-24.04-arm
+            platform:
+              android
             architecture:
               aarch64
           # Upstream issue
@@ -58,6 +60,8 @@ jobs:
           #     arm
           - runner:
               ubuntu-24.04
+            platform:
+              android
             architecture:
               x86_64
     runs-on:
@@ -669,6 +673,9 @@ jobs:
             "$(pwd)" \
             -iname \
               "*.pkg.tar.*"
+        name:
+          Installs the package.
+        run: |
           /entrypoint.sh \
             pacman \
               -Udd \
@@ -681,9 +688,9 @@ jobs:
           actions/upload-artifact@v4.6.0
         with:
           name:
-            artifact-${{ matrix.architecture }}
+            artifact-${{ matrix.platform }}-${{ matrix.architecture }}
           path:
-            dogeos-android-sequoia-sq-1.3.1-1-${{ matrix.architecture }}.pkg.tar.xz
+            sequoia-sq-1.3.1-1-${{ matrix.architecture }}.pkg.tar.xz
       # - name:
       #     Upload Termux package.
       #   uses:
@@ -711,6 +718,10 @@ jobs:
           #     ubuntu-24.04-arm
           #   architecture:
           #     aarch64
+          #   platform:
+          #     arch
+          #   architecture:
+          #     x86_64
           # Upstream issue
           # https://gitlab.com/sequoia-pgp/pgp-cert-d/-/issues/54
           # - runner:
@@ -723,6 +734,8 @@ jobs:
           #     arm
           - runner:
               ubuntu-24.04
+            platform:
+              arch
             architecture:
               x86_64
             container_architecture:
@@ -1011,7 +1024,7 @@ jobs:
               "cd /home/user/lur/sequoia-sq && reallymakepkg -v -w '/home/user/sequoia-sq-build' -- -df --nocheck" - \
             "user"
       - name:
-          Install the package.
+          Installs the package.
         run: |
           pacman \
             -Udd \
@@ -1020,6 +1033,13 @@ jobs:
                 "$(pwd)" \
                 -iname \
                   "*.pkg.tar.*")
+      - uses:
+          actions/upload-artifact@v4.6.0
+        with:
+          name:
+            artifact-${{ matrix.platform }}-${{ matrix.architecture }}
+          path:
+            /home/user/lur/sequoia-sq/sequoia-sq-1.3.1-1-${{ matrix.architecture }}.pkg.tar.xz
       # - uses:
       #     actions/checkout@v4.2.2
 
