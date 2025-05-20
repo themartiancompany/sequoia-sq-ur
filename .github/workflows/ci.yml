@@ -46,6 +46,8 @@ jobs:
               ubuntu-24.04-arm
             platform:
               android
+            platform_target:
+              termux
             architecture:
               aarch64
           # Upstream issue
@@ -62,6 +64,8 @@ jobs:
               ubuntu-24.04
             platform:
               android
+            platform_target:
+              termux
             architecture:
               x86_64
     runs-on:
@@ -757,6 +761,8 @@ jobs:
           - runner:
               ubuntu-24.04
             platform:
+              gnu
+            platform_target:
               arch
             architecture:
               x86_64
