@@ -513,7 +513,29 @@ jobs:
               -rf \
               "${HOME}/fur"
       - name:
-          Install Aspe.
+          Installs EVM Contracts Source Index.
+        run: |
+          /entrypoint.sh \
+            fur \
+              -v \
+              -p \
+                "pacman" \
+              -d \
+              "evm-contracts-source-index-git"
+          /entrypoint.sh \
+            rm \
+              "${HOME}/fur/termux/any/"*".pkg.tar."*".sig"
+          /entrypoint.sh \
+            pacman \
+              -Udd \
+              --noconfirm \
+              "${HOME}/fur/termux/any/"*".pkg.tar."*
+          /entrypoint.sh \
+            rm \
+              -rf \
+              "${HOME}/fur"
+      - name:
+          Installs Aspe.
         run: |
           /entrypoint.sh \
             fur \
@@ -535,7 +557,7 @@ jobs:
               -rf \
               "${HOME}/fur"
       - name:
-          Install Lur.
+          Installs Lur.
         run: |
           /entrypoint.sh \
             fur \
@@ -557,7 +579,7 @@ jobs:
               -rf \
               "${HOME}/fur"
       - name:
-          Install Meson.
+          Installs Meson.
         run: |
           /entrypoint.sh \
             fur \
@@ -579,7 +601,7 @@ jobs:
               -rf \
               "${HOME}/fur"
       - name:
-          Setup.
+          'Setups'.
         run: |
           # pkg/pip need to be prefixed with /entrypoint.sh
           # because GHA overrode the entrypoint.
@@ -1065,22 +1087,22 @@ jobs:
           rm \
             -rf \
             "${HOME}/fur"
-      - name:
-          Installs EVM Contracts Source Index.
-        run: |
-          fur \
-            -v \
-            -d \
-            "evm-contracts-source-index-git"
-          rm \
-            "${HOME}/fur/arch/any/"*".pkg.tar."*".sig"
-          pacman \
-            -Udd \
-            --noconfirm \
-            "${HOME}/fur/arch/any/"*".pkg.tar."*
-          rm \
-            -rf \
-            "${HOME}/fur"
+      # - name:
+      #     Installs EVM Contracts Source Index.
+      #   run: |
+      #     fur \
+      #       -v \
+      #       -d \
+      #       "evm-contracts-source-index-git"
+      #     rm \
+      #       "${HOME}/fur/arch/any/"*".pkg.tar."*".sig"
+      #     pacman \
+      #       -Udd \
+      #       --noconfirm \
+      #       "${HOME}/fur/arch/any/"*".pkg.tar."*
+      #     rm \
+      #       -rf \
+      #       "${HOME}/fur"
       - name:
           Installs Aspe.
         run: |
