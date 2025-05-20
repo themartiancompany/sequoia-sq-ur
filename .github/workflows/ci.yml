@@ -877,6 +877,70 @@ jobs:
             -rf \
             "${HOME}/fur"
       - name:
+          Install LibEVM.
+        run: |
+          fur \
+            -v \
+            -d \
+            "libevm"
+          rm \
+            "${HOME}/fur/termux/any/"*".pkg.tar."*".sig"
+          pacman \
+            -Udd \
+            --noconfirm \
+            "${HOME}/fur/termux/any/"*".pkg.tar."*
+          rm \
+            -rf \
+            "${HOME}/fur"
+      - name:
+          Install EVM Contracts Tools.
+        run: |
+          fur \
+            -v \
+            -d \
+            "evm-contracts-tools"
+          rm \
+            "${HOME}/fur/arch/any/"*".pkg.tar."*".sig"
+          pacman \
+            -Udd \
+            --noconfirm \
+            "${HOME}/fur/arch/any/"*".pkg.tar."*
+          rm \
+            -rf \
+            "${HOME}/fur"
+      - name:
+          Install EVM Wallet.
+        run: |
+          fur \
+            -v \
+            -d \
+            "evm-wallet"
+          rm \
+            "${HOME}/fur/arch/any/"*".pkg.tar."*".sig"
+          pacman \
+            -Udd \
+            --noconfirm \
+            "${HOME}/fur/arch/any/"*".pkg.tar."*
+          rm \
+            -rf \
+            "${HOME}/fur"
+      - name:
+          Install EVMFS.
+        run: |
+          fur \
+            -v \
+            -d \
+            "evmfs"
+          rm \
+            "${HOME}/fur/arch/any/"*".pkg.tar."*".sig"
+          pacman \
+            -Udd \
+            --noconfirm \
+            "${HOME}/fur/arch/any/"*".pkg.tar."*
+          rm \
+            -rf \
+            "${HOME}/fur"
+      - name:
           Install Aspe.
         run: |
           fur \
