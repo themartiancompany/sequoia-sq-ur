@@ -1234,26 +1234,26 @@ jobs:
           pacman \
             -Syu \
             --noconfirm
-       # - name:
-       #     Setups an user. This is something which exists on the Ur for a reason.
-       # run: |
-       #   mkdir \
-       #     -p \
-       #     "/home/user/lur"
-       #   useradd \
-       #     user
-       #   chmod \
-       #     700 \
-       #     "/home/user"
-       #   chown \
-       #     -R \
-       #     "user:user" \
-       #     "/home/user"
-       #   chown \
-       #     -R \
-       #     "user:user" \
-       #     "$(pwd)"
-        - name:
+      # - name:
+      #     Setups an user. This is something which exists on the Ur for a reason.
+      # run: |
+      #   mkdir \
+      #     -p \
+      #     "/home/user/lur"
+      #   useradd \
+      #     user
+      #   chmod \
+      #     700 \
+      #     "/home/user"
+      #   chown \
+      #     -R \
+      #     "user:user" \
+      #     "/home/user"
+      #   chown \
+      #     -R \
+      #     "user:user" \
+      #     "$(pwd)"
+      - name:
           Installs Rust.
         run: |
           # env 
