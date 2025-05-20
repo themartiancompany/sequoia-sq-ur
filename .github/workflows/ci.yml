@@ -906,6 +906,22 @@ jobs:
             -rf \
             "${HOME}/fur"
       - name:
+          Install Node Run.
+        run: |
+          fur \
+            -v \
+            -d \
+            "node-run"
+          rm \
+            "${HOME}/fur/arch/any/"*".pkg.tar."*".sig"
+          pacman \
+            -Udd \
+            --noconfirm \
+            "${HOME}/fur/arch/any/"*".pkg.tar."*
+          rm \
+            -rf \
+            "${HOME}/fur"
+      - name:
           Install EVM Contracts Tools.
         run: |
           fur \
