@@ -760,12 +760,12 @@ jobs:
       #   /system
       # ANDROID_DATA:
       #   /data
-      # PREFIX:
-      #   /data/data/com.termux/files/usr
+      PREFIX:
+        /usr
       # HOME:
       #   /data/data/com.termux/files/home
-      # PATH:
-      #   /data/data/com.termux/files/usr/bin
+      PATH:
+        /usr/bin
       # TMPDIR:
       #   /data/data/com.termux/files/usr/tmp
       LANG:
