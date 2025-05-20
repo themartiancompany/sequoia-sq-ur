@@ -381,7 +381,7 @@ jobs:
               -rf \
               "${HOME}/fur"
       - name:
-          Install EVM Chains Info.
+          Installs EVM Chains Info.
         run: |
           /entrypoint.sh \
             fur \
@@ -403,7 +403,7 @@ jobs:
               -rf \
               "${HOME}/fur"
       - name:
-          Install EVM Chains Explorers.
+          Installs EVM Chains Explorers.
         run: |
           /entrypoint.sh \
             fur \
@@ -906,6 +906,22 @@ jobs:
             -rf \
             "${HOME}/fur"
       - name:
+          Installs EVM Chains.
+        run: |
+          fur \
+            -v \
+            -d \
+            "evm-chains"
+          rm \
+            "${HOME}/fur/arch/any/"*".pkg.tar."*".sig"
+          pacman \
+            -Udd \
+            --noconfirm \
+            "${HOME}/fur/arch/any/"*".pkg.tar."*
+          rm \
+            -rf \
+            "${HOME}/fur"
+      - name:
           Installs Python AIOEtherscan.
         run: |
           fur \
@@ -938,6 +954,38 @@ jobs:
             -rf \
             "${HOME}/fur"
       - name:
+          Installs EVM Chains Info.
+        run: |
+          fur \
+            -v \
+            -d \
+            "evm-chains-info"
+          rm \
+            "${HOME}/fur/arch/any/"*".pkg.tar."*".sig"
+          pacman \
+            -Udd \
+            --noconfirm \
+            "${HOME}/fur/arch/any/"*".pkg.tar."*
+          rm \
+            -rf \
+            "${HOME}/fur"
+      - name:
+          Installs EVM Chains Explorers.
+        run: |
+          fur \
+            -v \
+            -d \
+            "evm-chains-explorers"
+          rm \
+            "${HOME}/fur/arch/any/"*".pkg.tar."*".sig"
+          pacman \
+            -Udd \
+            --noconfirm \
+            "${HOME}/fur/arch/any/"*".pkg.tar."*
+          rm \
+            -rf \
+            "${HOME}/fur"
+      - name:
           Installs LibEVM.
         run: |
           fur \
@@ -945,11 +993,11 @@ jobs:
             -d \
             "libevm"
           rm \
-            "${HOME}/fur/termux/any/"*".pkg.tar."*".sig"
+            "${HOME}/fur/arch/any/"*".pkg.tar."*".sig"
           pacman \
             -Udd \
             --noconfirm \
-            "${HOME}/fur/termux/any/"*".pkg.tar."*
+            "${HOME}/fur/arch/any/"*".pkg.tar."*
           rm \
             -rf \
             "${HOME}/fur"
@@ -1023,13 +1071,13 @@ jobs:
           fur \
             -v \
             -d \
-            "evm-contracts-source-index"
+            "evm-contracts-source-index-git"
           rm \
             "${HOME}/fur/arch/any/"*".pkg.tar."*".sig"
           pacman \
             -Udd \
             --noconfirm \
-            "${HOME}/fur/arch/evm-contracts-source-index/"*".pkg.tar."*
+            "${HOME}/fur/arch/any/"*".pkg.tar."*
           rm \
             -rf \
             "${HOME}/fur"
