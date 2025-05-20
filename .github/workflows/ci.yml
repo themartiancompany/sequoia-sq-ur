@@ -890,6 +890,22 @@ jobs:
             -rf \
             "${HOME}/fur"
       - name:
+          Install Python AIOEtherscan.
+        run: |
+          fur \
+            -v \
+            -d \
+            "python-aioetherscan"
+          rm \
+            "${HOME}/fur/arch/${{ matrix.architecture }}/"*".pkg.tar."*".sig"
+          pacman \
+            -Udd \
+            --noconfirm \
+            "${HOME}/fur/arch/${{ matrix.archicture }}/"*".pkg.tar."*
+          rm \
+            -rf \
+            "${HOME}/fur"
+      - name:
           Install Node Ethers.
         run: |
           fur \
@@ -897,11 +913,11 @@ jobs:
             -d \
             "nodejs-ethers"
           rm \
-            "${HOME}/fur/arch/${{ matrix.architecture }}/"*".pkg.tar."*".sig"
+            "${HOME}/fur/arch/any/"*".pkg.tar."*".sig"
           pacman \
             -Udd \
             --noconfirm \
-            "${HOME}/fur/arch/${{ matrix.architecture }}/"*".pkg.tar."*
+            "${HOME}/fur/arch/any/"*".pkg.tar."*
           rm \
             -rf \
             "${HOME}/fur"
