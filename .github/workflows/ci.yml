@@ -601,7 +601,7 @@ jobs:
               -rf \
               "${HOME}/fur"
       - name:
-          'Setups'.
+          Installs Clang and Ninja.
         run: |
           # pkg/pip need to be prefixed with /entrypoint.sh
           # because GHA overrode the entrypoint.
