@@ -688,7 +688,6 @@ jobs:
       #       sequoia-sq-1.3.1-1-${{ matrix.architecture }}.pkg.tar.xz
       #     asset_content_type:
       #       application/gzip
-
   arch:
     name:
       Life and DogeOS GNU Base package build (Arch CI).
@@ -1209,6 +1208,70 @@ jobs:
             artifact-${{ matrix.platform }}-${{ matrix.architecture }}
           path:
             sequoia-sq-1.3.1-1-${{ matrix.architecture }}.pkg.tar.xz
+  msys2-ucrt64:
+    runs-on:
+      windows-latest
+    defaults:
+      run:
+        shell:
+          msys2 {0}
+    steps:
+      - uses:
+          actions/checkout@v3
+      - uses:
+          msys2/setup-msys2@v2
+        with:
+          msystem:
+            UCRT64
+          update:
+            true
+          install:
+            git
+            mingw-w64-ucrt-x86_64-gcc
+      - name:
+          Upgrade Arch environment.
+        run: |
+          pacman \
+            -Syu \
+            --noconfirm
+      - name:
+          Setups an user. This is something which exists on the Ur for a reason.
+        run: |
+          mkdir \
+            -p \
+            "/home/user/lur"
+          useradd \
+            user
+          chmod \
+            700 \
+            "/home/user"
+          chown \
+            -R \
+            "user:user" \
+            "/home/user"
+          chown \
+            -R \
+            "user:user" \
+            "$(pwd)"
+      - name:
+          Builds the package.
+        run: |
+          su \
+            -c \
+              "cd '$(pwd)' && reallymakepkg -v -w '/home/user/sequoia-sq-build' -- -df --nocheck" - \
+            "user"
+      # - name: CI-Build
+      #   run: |
+      #     git \
+      #       clone \
+      #         --branch="libcrash-bash" \
+      #         --single-branch \
+      #         --depth=1 \
+      #         "https://github.com/themartiancompany/fur" \
+      #         "${HOME}/fur"
+
+      #     echo 'Running in MSYS2!'
+      #     ./ci-build.sh
 
   # This is the ideal way termux-docker would work with GHA.
   broken-ideal:
