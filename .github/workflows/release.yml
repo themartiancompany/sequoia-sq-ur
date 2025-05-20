@@ -1184,13 +1184,13 @@ jobs:
       #         "git clone 'https://github.com/themartiancompany/sequoia-sq-ur' '/home/user/lur/sequoia-sq'" - \
       #       user
       - name:
-          Install build dependencies.
+          Installs build dependencies.
         run: |
           pacman \
             -S \
               --noconfirm \
             $(recipe-get \
-                "/home/user/lur/sequoia-sq/PKGBUILD" \
+                "PKGBUILD" \
                 "makedepends")
       - name:
           Builds the Arch package.
