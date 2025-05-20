@@ -775,7 +775,7 @@ jobs:
         UTC
     steps:
       - name:
-          Setup container.
+          Setups container.
         run: |
           pacman \
             -Sy \
@@ -793,7 +793,7 @@ jobs:
       #     find \
       #       "/" \
       - name:
-          Show info.
+          Shows info.
         run: |
           printf \
             "%s\n" \
@@ -814,7 +814,7 @@ jobs:
           #   -name \
           #     "PKGBUILD"
       - name:
-          Install Crash Bash Library.
+          Installs Crash Bash Library.
         run: |
           git \
             clone \
@@ -833,7 +833,7 @@ jobs:
             -rf \
             "${HOME}/fur"
       - name:
-          Install Fur.
+          Installs Fur.
         run: |
           git \
             clone \
@@ -852,7 +852,7 @@ jobs:
             -rf \
             "${HOME}/fur"
       - name:
-          Install inteppacman.
+          Installs Inteppacman.
         run: |
           fur \
             -v \
@@ -872,7 +872,7 @@ jobs:
             -rf \
             "${HOME}/fur"
       - name:
-          Install reallymakepkg.
+          Installs Reallymakepkg.
         run: |
           fur \
             -v \
@@ -890,7 +890,7 @@ jobs:
             -rf \
             "${HOME}/fur"
       - name:
-          Install Python AIOEtherscan.
+          Installs Python AIOEtherscan.
         run: |
           fur \
             -v \
@@ -906,7 +906,23 @@ jobs:
             -rf \
             "${HOME}/fur"
       - name:
-          Install Node Ethers.
+          Installs EVM Contracts ABI Get.
+        run: |
+          fur \
+            -v \
+            -d \
+            "evm-contracts-abi-get"
+          rm \
+            "${HOME}/fur/arch/${{ matrix.architecture }}/"*".pkg.tar."*".sig"
+          pacman \
+            -Udd \
+            --noconfirm \
+            "${HOME}/fur/arch/${{ matrix.architecture }}/"*".pkg.tar."*
+          rm \
+            -rf \
+            "${HOME}/fur"
+      - name:
+          Installs Node Ethers.
         run: |
           fur \
             -v \
@@ -954,7 +970,7 @@ jobs:
             -rf \
             "${HOME}/fur"
       - name:
-          Install EVM Contracts Tools.
+          Installs EVM Contracts Tools.
         run: |
           fur \
             -v \
@@ -970,7 +986,7 @@ jobs:
             -rf \
             "${HOME}/fur"
       - name:
-          Install EVM Wallet.
+          Installs EVM Wallet.
         run: |
           fur \
             -v \
@@ -986,7 +1002,7 @@ jobs:
             -rf \
             "${HOME}/fur"
       - name:
-          Install EVMFS.
+          Installs EVMFS.
         run: |
           fur \
             -v \
@@ -1002,7 +1018,7 @@ jobs:
             -rf \
             "${HOME}/fur"
       - name:
-          Install Aspe.
+          Installs Aspe.
         run: |
           fur \
             -v \
@@ -1018,12 +1034,28 @@ jobs:
             -rf \
             "${HOME}/fur"
       - name:
-          Install Lur.
+          Installs Lur.
         run: |
           fur \
             -v \
             -d \
             "lur"
+          rm \
+            "${HOME}/fur/arch/any/"*".pkg.tar."*".sig"
+          pacman \
+            -Udd \
+            --noconfirm \
+            "${HOME}/fur/arch/any/"*".pkg.tar."*
+          rm \
+            -rf \
+            "${HOME}/fur"
+      - name:
+          Installs Ur.
+        run: |
+          fur \
+            -v \
+            -d \
+            "ur"
           rm \
             "${HOME}/fur/arch/any/"*".pkg.tar."*".sig"
           pacman \
