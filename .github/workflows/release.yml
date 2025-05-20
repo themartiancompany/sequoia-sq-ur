@@ -28,7 +28,7 @@
 name:
   release
 run-name:
-  Releases Life and DogeOS packages (CI).
+  Releases Life and DogeOS packages.
 permissions:
   contents:
     write
@@ -47,7 +47,7 @@ jobs:
   
   termux_release:
     name:
-      Releases the Life and DogeOS Android base (Termux) binary packages.
+      Life and DogeOS Android base (Termux) binary packages.
     strategy:
       matrix:
         include:
@@ -707,7 +707,7 @@ jobs:
             application/gzip
   arch:
     name:
-      Life and DogeOS GNU Base package build (Arch CI).
+      Life and DogeOS GNU Base (Arch Linux) binary packages.
     strategy:
       matrix:
         include:
