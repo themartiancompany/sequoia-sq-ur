@@ -1289,12 +1289,12 @@ jobs:
       - name:
           Builds the package.
         run: |
-        reallymakepkg \
-          -v \
-          -w \
-            '/home/user/sequoia-sq-build' -- \
-          -df \
-          --nocheck
+          reallymakepkg \
+            -v \
+            -w \
+              '/home/user/sequoia-sq-build' -- \
+            -df \
+            --nocheck
           # su \
           #   -c \
           #     "cd '$(pwd)' && reallymakepkg -v -w '/home/user/sequoia-sq-build' -- -df --nocheck" - \
