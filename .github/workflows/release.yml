@@ -1202,9 +1202,9 @@ jobs:
       - name:
           Installs the package.
         run: |
-          mv \
-            "/home/user/lur/sequoia-sq/"*".pkg.tar."* \
-            "$(pwd)"
+          # mv \
+          #   "/home/user/lur/sequoia-sq/"*".pkg.tar."* \
+          #   "$(pwd)"
           pacman \
             -Udd \
             --noconfirm \
