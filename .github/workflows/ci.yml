@@ -673,7 +673,7 @@ jobs:
             "$(pwd)" \
             -iname \
               "*.pkg.tar.*"
-        name:
+      - name:
           Installs the package.
         run: |
           /entrypoint.sh \
