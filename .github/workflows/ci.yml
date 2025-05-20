@@ -1193,7 +1193,7 @@ jobs:
           Installs the package.
         run: |
           mv \
-            "/home/user/sequoia-sq/"*".pkg.tar."* \
+            "/home/user/lur/sequoia-sq/"*".pkg.tar."* \
             "$(pwd)"
           pacman \
             -Udd \
