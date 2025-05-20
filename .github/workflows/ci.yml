@@ -1026,6 +1026,9 @@ jobs:
       - name:
           Installs the package.
         run: |
+          mv \
+            "/home/user/sequoia-sq/"*".pkg.tar."* \
+            "$(pwd)"
           pacman \
             -Udd \
             --noconfirm \
@@ -1039,7 +1042,7 @@ jobs:
           name:
             artifact-${{ matrix.platform }}-${{ matrix.architecture }}
           path:
-            /home/user/lur/sequoia-sq/sequoia-sq-1.3.1-1-${{ matrix.architecture }}.pkg.tar.xz
+            sequoia-sq-1.3.1-1-${{ matrix.architecture }}.pkg.tar.xz
       # - uses:
       #     actions/checkout@v4.2.2
 
