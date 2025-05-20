@@ -1294,7 +1294,7 @@ jobs:
           -w \
             '/home/user/sequoia-sq-build' -- \
           -df \
-          --nocheck"
+          --nocheck
           # su \
           #   -c \
           #     "cd '$(pwd)' && reallymakepkg -v -w '/home/user/sequoia-sq-build' -- -df --nocheck" - \
