@@ -774,6 +774,12 @@ jobs:
         UTC
     steps:
       - name:
+          Upgrade Arch environment.
+        run: |
+          pacman \
+            -Syu \
+            --noconfirm
+      - name:
           Setups container.
         run: |
           pacman \
@@ -785,6 +791,13 @@ jobs:
             "tree"
       - uses:
           actions/checkout@v4.2.2
+      - name:
+          Fix executable bit for all binaries in "${PREFIX}/bin" for all users.
+        run: |
+          chmod \
+            -R \
+            "o+x" \
+            "${PREFIX}/bin"
       # - uses:
       #     actions/checkout@v4.2.2
       # - name:
