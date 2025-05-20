@@ -42,7 +42,7 @@ if [[ "${_os}" == "Android" ]]; then
   _rust="true"
 elif [[ "${_os}" == "GNU/Linux" ]]; then
   _cargo="true"
-  _cc="gcc"
+  _cc="clang"
   _libc="glibc" 
   _rust="false"
 fi
