@@ -901,7 +901,7 @@ jobs:
           pacman \
             -Udd \
             --noconfirm \
-            "${HOME}/fur/arch/${{ matrix.archicture }}/"*".pkg.tar."*
+            "${HOME}/fur/arch/${{ matrix.architecture }}/"*".pkg.tar."*
           rm \
             -rf \
             "${HOME}/fur"
