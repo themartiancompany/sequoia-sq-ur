@@ -890,6 +890,22 @@ jobs:
             -rf \
             "${HOME}/fur"
       - name:
+          Install Node Ethers.
+        run: |
+          fur \
+            -v \
+            -d \
+            "nodejs-ethers"
+          rm \
+            "${HOME}/fur/arch/${{ matrix.architecture }}/"*".pkg.tar."*".sig"
+          pacman \
+            -Udd \
+            --noconfirm \
+            "${HOME}/fur/arch/${{ matrix.architecture }}/"*".pkg.tar."*
+          rm \
+            -rf \
+            "${HOME}/fur"
+      - name:
           Install LibEVM.
         run: |
           fur \
