@@ -783,7 +783,7 @@ jobs:
           Installs NodeJS to force compatibility with actions/checkout and actions/upload-artifact.
         run: |
           pacman \
-            -Sy \
+            -S \
             --noconfirm \
               "nodejs-lts"
           ln \
@@ -794,7 +794,7 @@ jobs:
           Setups container.
         run: |
           pacman \
-            -Sy \
+            -S \
             --noconfirm \
             "git" \
             "python" \
@@ -808,16 +808,6 @@ jobs:
             -R \
             "o+x" \
             "${PREFIX}/bin"
-      # - uses:
-      #     actions/checkout@v4.2.2
-      # - name:
-      #     Show content of the current directory.
-      #   run: |
-      #     ls \
-      #       "$(pwd)"
-      #     tree "/"
-      #     find \
-      #       "/" \
       - name:
           Shows info.
         run: |
@@ -833,12 +823,6 @@ jobs:
             -L \
               2 \
             "/"
-          # find \
-          #   "/" \
-          #   -type \
-          #     "f" \
-          #   -name \
-          #     "PKGBUILD"
       - name:
           Installs Crash Bash Library.
         run: |
