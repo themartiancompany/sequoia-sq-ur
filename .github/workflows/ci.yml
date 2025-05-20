@@ -768,6 +768,8 @@ jobs:
             -sf \
             "${PREFIX}/bin" \
             "/__e/node20/bin"
+      - uses:
+          actions/checkout@v4.2.2
       - name:
           Fixes executable bit for all binaries in "${PREFIX}/bin" for all users.
         run: |
@@ -790,8 +792,6 @@ jobs:
             "git" \
             "python" \
             "tree"
-      # - uses:
-      #     actions/checkout@v4.2.2
       # - name:
       #     Show content of the current directory.
       #   run: |
@@ -1170,13 +1170,17 @@ jobs:
             -R \
             "user:user" \
             "/home/user"
-      - name:
-          Gets the actual repo source because somehow it is missing for this container.
-        run: |
-          su \
-            -c \
-              "git clone 'https://github.com/themartiancompany/sequoia-sq-ur' '/home/user/lur/sequoia-sq'" - \
-            user
+          chown \
+            -R \
+            "user:user" \
+            "$(pwd)"
+      # - name:
+      #     Gets the actual repo source because somehow it is missing for this container.
+      #   run: |
+      #     su \
+      #       -c \
+      #         "git clone 'https://github.com/themartiancompany/sequoia-sq-ur' "$(pwd)/sequoia-sq'" - \
+      #       user
       - name:
           Install build dependencies.
         run: |
@@ -1191,14 +1195,14 @@ jobs:
         run: |
           su \
             -c \
-              "cd /home/user/lur/sequoia-sq && reallymakepkg -v -w '/home/user/sequoia-sq-build' -- -df --nocheck" - \
+              "cd '$(pwd)' && reallymakepkg -v -w '/home/user/sequoia-sq-build' -- -df --nocheck" - \
             "user"
       - name:
           Installs the package.
         run: |
-          mv \
-            "/home/user/lur/sequoia-sq/"*".pkg.tar."* \
-            "$(pwd)"
+          # mv \
+          #   "/home/user/lur/sequoia-sq/"*".pkg.tar."* \
+          #   "$(pwd)"
           pacman \
             -Udd \
             --noconfirm \
@@ -1213,8 +1217,6 @@ jobs:
             artifact-${{ matrix.platform }}-${{ matrix.architecture }}
           path:
             /home/dev/lur/sequoia-sq/sequoia-sq-1.3.1-1-${{ matrix.architecture }}.pkg.tar.xz
-      # - uses:
-      #     actions/checkout@v4.2.2
 
   # This is the ideal way termux-docker would work with GHA.
   broken-ideal:
