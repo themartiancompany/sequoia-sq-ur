@@ -1209,6 +1209,8 @@ jobs:
           path:
             sequoia-sq-1.3.1-1-${{ matrix.architecture }}.pkg.tar.xz
   msys2-ucrt64:
+    name:
+      Life and DogeOS Windows base packages (CI).
     runs-on:
       windows-latest
     defaults:
