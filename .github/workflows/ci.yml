@@ -127,14 +127,14 @@ jobs:
       # Relevant internal source code of GitHub Actions:
       # https://github.com/actions/toolkit/blob/930c89072712a3aac52d74b23338f00bb0cfcb24/packages/io/src/io-util.ts#L167-L177
       - name:
-          Fix executable bit for all binaries in "${PREFIX}/bin" for all users.
+          Fixes executable bit for all binaries in "${PREFIX}/bin" for all users.
         run: |
           chmod \
             -R \
             "o+x" \
             "${PREFIX}/bin"
       - name:
-          Install bionic-libc NodeJS to force compatibility with actions/checkout and actions/upload-artifact.
+          Installs Bionic C Library NodeJS to force compatibility with actions/checkout and actions/upload-artifact.
         run: |
           /entrypoint.sh \
             pkg \
@@ -148,7 +148,7 @@ jobs:
       - uses:
           actions/checkout@v4.2.2
       - name:
-          Fix permissions of repository after actions/checkout, which ran as root user, while entrypoint.sh activates system user (1000).
+          Fixes permissions of repository after actions/checkout, which ran as root user, while entrypoint.sh activates system user (1000).
         run: |
           chown \
             -R \
@@ -758,7 +758,18 @@ jobs:
         UTC
     steps:
       - name:
-          Fix executable bit for all binaries in "${PREFIX}/bin" for all users.
+          Installs NodeJS to force compatibility with actions/checkout and actions/upload-artifact.
+        run: |
+          pacman \
+            -Sy \
+            --noconfirm \
+              "nodejs-lts"
+          ln \
+            -sf \
+            "${PREFIX}/bin" \
+            "/__e/node20/bin"
+      - name:
+          Fixes executable bit for all binaries in "${PREFIX}/bin" for all users.
         run: |
           chmod \
             -R \
