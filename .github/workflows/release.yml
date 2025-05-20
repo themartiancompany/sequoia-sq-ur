@@ -165,7 +165,7 @@ jobs:
                 -y \
                 "python"
       - name:
-          Install Rust.
+          Installs Rust.
         run: |
           # env 
           #   _arch="$( \
@@ -200,7 +200,7 @@ jobs:
                 "rust" \
                 "rust-std-armv7-linux-androideabi"
       - name:
-          Install Git.
+          Installs Git.
         run: |
           /entrypoint.sh \
             pkg \
@@ -208,7 +208,7 @@ jobs:
                 -y \
                 "git"
       - name:
-          Install Capnproto.
+          Installs Capnproto.
         run: |
           /entrypoint.sh \
             pkg \
@@ -216,7 +216,7 @@ jobs:
                 -y \
                 "capnproto"
       - name:
-          Install Pacman.
+          Installs Pacman.
         run: |
           /entrypoint.sh \
             pkg \
@@ -231,7 +231,7 @@ jobs:
             pacman-key \
               --init
       - name:
-          Install Crash Bash Library.
+          Installs Crash Bash Library.
         run: |
           /entrypoint.sh git \
               clone \
@@ -253,7 +253,7 @@ jobs:
               -rf \
               "${HOME}/fur"
       - name:
-          Install Fur.
+          Installs Fur.
         run: |
           /entrypoint.sh \
             git \
@@ -276,7 +276,7 @@ jobs:
               -rf \
               "${HOME}/fur"
       - name:
-          Install latest Fur.
+          Installs latest Fur.
         run: |
           /entrypoint.sh \
             git \
@@ -287,7 +287,7 @@ jobs:
                 "https://github.com/themartiancompany/fur" \
                 "${HOME}/fur-src"
       - name:
-          Install Python Pygments.
+          Installs Python Pygments.
         run: |
           /entrypoint.sh \
             fur \
@@ -312,7 +312,7 @@ jobs:
               -rf \
               "${HOME}/fur"
       - name:
-          Install reallymakepkg.
+          Installs reallymakepkg.
         run: |
           /entrypoint.sh \
             fur \
@@ -337,7 +337,7 @@ jobs:
               -rf \
               "${HOME}/fur"
       - name:
-          Install 'build essential' ahah.
+          Installs 'build essential' ahah.
         run: |
           /entrypoint.sh \
             pkg \
@@ -348,7 +348,7 @@ jobs:
                 file \
                 build-essential
       - name:
-          Install make.
+          Installs make.
         run: |
           /entrypoint.sh \
             pkg \
@@ -356,7 +356,7 @@ jobs:
                 -y \
                 "make"
       - name:
-          Install Python Docutils.
+          Installs Python Docutils.
         run: |
           /entrypoint.sh \
             fur \
@@ -378,7 +378,7 @@ jobs:
               -rf \
               "${HOME}/fur"
       - name:
-          Install EVM Chains Info.
+          Installs EVM Chains Info.
         run: |
           /entrypoint.sh \
             fur \
@@ -400,7 +400,7 @@ jobs:
               -rf \
               "${HOME}/fur"
       - name:
-          Install EVM Chains Explorers.
+          Installs EVM Chains Explorers.
         run: |
           /entrypoint.sh \
             fur \
@@ -422,7 +422,7 @@ jobs:
               -rf \
               "${HOME}/fur"
       - name:
-          Install LibEVM.
+          Installs LibEVM.
         run: |
           /entrypoint.sh \
             fur \
@@ -444,7 +444,7 @@ jobs:
               -rf \
               "${HOME}/fur"
       - name:
-          Install EVM Contracts Tools.
+          Installs EVM Contracts Tools.
         run: |
           /entrypoint.sh \
             fur \
@@ -466,7 +466,7 @@ jobs:
               -rf \
               "${HOME}/fur"
       - name:
-          Install EVM Wallet.
+          Installs EVM Wallet.
         run: |
           /entrypoint.sh \
             fur \
@@ -488,7 +488,7 @@ jobs:
               -rf \
               "${HOME}/fur"
       - name:
-          Install EVMFS.
+          Installs EVMFS.
         run: |
           /entrypoint.sh \
             fur \
@@ -510,7 +510,7 @@ jobs:
               -rf \
               "${HOME}/fur"
       - name:
-          Install Aspe.
+          Installs Aspe.
         run: |
           /entrypoint.sh \
             fur \
@@ -532,7 +532,7 @@ jobs:
               -rf \
               "${HOME}/fur"
       - name:
-          Install Lur.
+          Installs Lur.
         run: |
           /entrypoint.sh \
             fur \
@@ -554,7 +554,7 @@ jobs:
               -rf \
               "${HOME}/fur"
       - name:
-          Install Meson.
+          Installs Meson.
         run: |
           /entrypoint.sh \
             fur \
@@ -635,7 +635,7 @@ jobs:
           #     -L \
           #       2 \
           #     "/"
-          # Install reallymakepkg with latest fur
+          # Installs reallymakepkg with latest fur
           # /entrypoint.sh \
           #   mkdir \
           #     -p \
@@ -650,7 +650,7 @@ jobs:
           #       -o \
           #         "${HOME}/reallymakepkg-fur" \
           #       "reallymakepkg"
-          # Install reallymakepkg with stable fur
+          # Installs reallymakepkg with stable fur
           # /entrypoint.sh \
           #   pacman -Udd \
           #     --noconfirm \
