@@ -1036,13 +1036,13 @@ jobs:
                 "$(pwd)" \
                 -iname \
                   "*.pkg.tar.*")
-      # - uses:
-      #     actions/upload-artifact@v4.6.0
-      #   with:
-      #     name:
-      #       artifact-${{ matrix.platform }}-${{ matrix.architecture }}
-      #     path:
-      #       sequoia-sq-1.3.1-1-${{ matrix.architecture }}.pkg.tar.xz
+      - uses:
+          actions/upload-artifact@v4.6.0
+        with:
+          name:
+            artifact-${{ matrix.platform }}-${{ matrix.architecture }}
+          path:
+            sequoia-sq-1.3.1-1-${{ matrix.architecture }}.pkg.tar.xz
       # - uses:
       #     actions/checkout@v4.2.2
 
