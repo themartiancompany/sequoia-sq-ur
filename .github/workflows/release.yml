@@ -780,8 +780,11 @@ jobs:
             -Sy \
             --noconfirm \
             "git" \
+            "nodejs-lts" \
             "python" \
             "tree"
+      - uses:
+          actions/checkout@v4.2.2
       # - uses:
       #     actions/checkout@v4.2.2
       # - name:
@@ -1179,7 +1182,7 @@ jobs:
                 "/home/user/lur/sequoia-sq/PKGBUILD" \
                 "makedepends")
       - name:
-          Builds the package.
+          Builds the Arch package.
         run: |
           su \
             -c \
@@ -1209,7 +1212,7 @@ jobs:
         id:
           version
       - name:
-          Upload Termux package.
+          Upload Arch package.
         uses:
           actions/upload-release-asset@v1
         env:
