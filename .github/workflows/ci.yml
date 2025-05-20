@@ -163,7 +163,7 @@ jobs:
               -p \
               "${HOME}"
       - name:
-          Install Python.
+          Installs Python.
         run: |
           /entrypoint.sh \
             pkg \
@@ -171,7 +171,7 @@ jobs:
                 -y \
                 "python"
       - name:
-          Install Rust.
+          Installs Rust.
         run: |
           # env 
           #   _arch="$( \
@@ -206,7 +206,7 @@ jobs:
                 "rust" \
                 "rust-std-armv7-linux-androideabi"
       - name:
-          Install Git.
+          Installs Git.
         run: |
           /entrypoint.sh \
             pkg \
@@ -214,7 +214,7 @@ jobs:
                 -y \
                 "git"
       - name:
-          Install Capnproto.
+          Installs Capnproto.
         run: |
           /entrypoint.sh \
             pkg \
@@ -222,7 +222,7 @@ jobs:
                 -y \
                 "capnproto"
       - name:
-          Install Pacman.
+          Installs Pacman.
         run: |
           /entrypoint.sh \
             pkg \
@@ -237,7 +237,7 @@ jobs:
             pacman-key \
               --init
       - name:
-          Install Crash Bash Library.
+          Installs Crash Bash Library.
         run: |
           /entrypoint.sh \
             git \
@@ -260,7 +260,7 @@ jobs:
               -rf \
               "${HOME}/fur"
       - name:
-          Install Fur.
+          Installs Fur.
         run: |
           /entrypoint.sh \
             git \
@@ -283,7 +283,7 @@ jobs:
               -rf \
               "${HOME}/fur"
       - name:
-          Install latest Fur.
+          Installs latest Fur.
         run: |
           /entrypoint.sh \
             git \
@@ -294,7 +294,7 @@ jobs:
                 "https://github.com/themartiancompany/fur" \
                 "${HOME}/fur-src"
       - name:
-          Install Python Pygments.
+          Installs Python Pygments.
         run: |
           /entrypoint.sh \
             fur \
@@ -319,7 +319,7 @@ jobs:
               -rf \
               "${HOME}/fur"
       - name:
-          Install reallymakepkg.
+          Installs reallymakepkg.
         run: |
           /entrypoint.sh \
             fur \
@@ -344,7 +344,7 @@ jobs:
               -rf \
               "${HOME}/fur"
       - name:
-          Install 'build essential' ahah.
+          Installs 'build essential' ahah.
         run: |
           /entrypoint.sh \
             pkg \
@@ -355,7 +355,7 @@ jobs:
                 file \
                 build-essential
       - name:
-          Install make.
+          Installs make.
         run: |
           /entrypoint.sh \
             pkg \
@@ -363,7 +363,7 @@ jobs:
                 -y \
                 "make"
       - name:
-          Install Python Docutils.
+          Installs Python Docutils.
         run: |
           /entrypoint.sh \
             fur \
@@ -429,7 +429,7 @@ jobs:
               -rf \
               "${HOME}/fur"
       - name:
-          Install LibEVM.
+          Installs LibEVM.
         run: |
           /entrypoint.sh \
             fur \
@@ -451,7 +451,7 @@ jobs:
               -rf \
               "${HOME}/fur"
       - name:
-          Install EVM Contracts Tools.
+          Installs EVM Contracts Tools.
         run: |
           /entrypoint.sh \
             fur \
@@ -473,7 +473,7 @@ jobs:
               -rf \
               "${HOME}/fur"
       - name:
-          Install EVM Wallet.
+          Installs EVM Wallet.
         run: |
           /entrypoint.sh \
             fur \
@@ -495,7 +495,7 @@ jobs:
               -rf \
               "${HOME}/fur"
       - name:
-          Install EVMFS.
+          Installs EVMFS.
         run: |
           /entrypoint.sh \
             fur \
@@ -1174,13 +1174,13 @@ jobs:
       #         "git clone 'https://github.com/themartiancompany/sequoia-sq-ur' "$(pwd)/sequoia-sq'" - \
       #       user
       - name:
-          Install build dependencies.
+          Installs build dependencies.
         run: |
           pacman \
             -S \
               --noconfirm \
             $(recipe-get \
-                "/home/user/lur/sequoia-sq/PKGBUILD" \
+                "PKGBUILD" \
                 "makedepends")
       - name:
           Builds the package.
