@@ -1188,13 +1188,17 @@ jobs:
             -R \
             "user:user" \
             "/home/user"
-      - name:
-          Gets the actual repo source because somehow it is missing for this container.
-        run: |
-          su \
-            -c \
-              "git clone 'https://github.com/themartiancompany/sequoia-sq-ur' '/home/user/lur/sequoia-sq'" - \
-            user
+          chown \
+            -R \
+            "user:user" \
+            "$(pwd)"
+      # - name:
+      #     Gets the actual repo source because somehow it is missing for this container.
+      #   run: |
+      #     su \
+      #       -c \
+      #         "git clone 'https://github.com/themartiancompany/sequoia-sq-ur' '/home/user/lur/sequoia-sq'" - \
+      #       user
       - name:
           Install build dependencies.
         run: |
@@ -1209,7 +1213,7 @@ jobs:
         run: |
           su \
             -c \
-              "cd /home/user/lur/sequoia-sq && reallymakepkg -v -w '/home/user/sequoia-sq-build' -- -df --nocheck" - \
+              "cd $(pwd) && reallymakepkg -v -w '/home/user/sequoia-sq-build' -- -df --nocheck" - \
             "user"
       - name:
           Installs the package.
