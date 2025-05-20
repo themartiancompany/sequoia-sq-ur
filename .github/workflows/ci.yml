@@ -758,6 +758,21 @@ jobs:
         UTC
     steps:
       - name:
+          Upgrade Arch environment.
+        run: |
+          pacman \
+            -Syu \
+            --noconfirm
+      - name:
+          Setups container.
+        run: |
+          pacman \
+            -Sy \
+            --noconfirm \
+            "git" \
+            "python" \
+            "tree"
+      - name:
           Installs NodeJS to force compatibility with actions/checkout and actions/upload-artifact.
         run: |
           pacman \
@@ -777,29 +792,6 @@ jobs:
             -R \
             "o+x" \
             "${PREFIX}/bin"
-      - name:
-          Upgrade Arch environment.
-        run: |
-          pacman \
-            -Syu \
-            --noconfirm
-      - name:
-          Setups container.
-        run: |
-          pacman \
-            -Sy \
-            --noconfirm \
-            "git" \
-            "python" \
-            "tree"
-      # - name:
-      #     Show content of the current directory.
-      #   run: |
-      #     ls \
-      #       "$(pwd)"
-      #     tree "/"
-      #     find \
-      #       "/" \
       - name:
           Shows info.
         run: |
