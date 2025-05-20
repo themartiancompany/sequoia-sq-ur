@@ -705,7 +705,7 @@ jobs:
             dogeos-android-sequoia-sq-1.3.1-1-${{ matrix.architecture }}.pkg.tar.xz
           asset_content_type:
             application/gzip
-  arch:
+  arch_release:
     name:
       Life and DogeOS GNU Base (Arch Linux) binary packages.
     strategy:
