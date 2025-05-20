@@ -1018,6 +1018,22 @@ jobs:
             -rf \
             "${HOME}/fur"
       - name:
+          Installs EVM Contracts Source Index.
+        run: |
+          fur \
+            -v \
+            -d \
+            "evm-contracts-source-index"
+          rm \
+            "${HOME}/fur/arch/any/"*".pkg.tar."*".sig"
+          pacman \
+            -Udd \
+            --noconfirm \
+            "${HOME}/fur/arch/evm-contracts-source-index/"*".pkg.tar."*
+          rm \
+            -rf \
+            "${HOME}/fur"
+      - name:
           Installs Aspe.
         run: |
           fur \
