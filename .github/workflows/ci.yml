@@ -1208,7 +1208,7 @@ jobs:
           name:
             artifact-${{ matrix.platform }}-${{ matrix.architecture }}
           path:
-            /home/dev/lur/sequoia-sq/sequoia-sq-1.3.1-1-${{ matrix.architecture }}.pkg.tar.xz
+            sequoia-sq-1.3.1-1-${{ matrix.architecture }}.pkg.tar.xz
 
   # This is the ideal way termux-docker would work with GHA.
   broken-ideal:
