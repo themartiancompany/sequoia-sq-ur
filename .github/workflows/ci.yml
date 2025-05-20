@@ -763,8 +763,9 @@ jobs:
           pacman \
             -Sy \
             --noconfirm \
-            git \
-            tree
+            "git" \
+            "python" \
+            "tree"
       # - uses:
       #     actions/checkout@v4.2.2
       # - name:
