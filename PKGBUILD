@@ -59,7 +59,7 @@ _commit="fd270aeedfffc7d03f8bd61bcf0842a831ec7ded"
 # refs/tags/v0.34.1
 _sq_commit="696bf3a677fe8a34ed02c6e44afa1cc3c1e273df"
 # refs/tags/v0.34.0
-pkgrel=12
+pkgrel=13
 pkgdesc='Command-line frontends for Sequoia'
 url="https://${_pkg}-pgp.org"
 arch=(
@@ -393,7 +393,7 @@ check() {
   cargo \
     test \
     --release \
-    --frozen \
+    # --frozen \
     --features \
       'default'
   true
