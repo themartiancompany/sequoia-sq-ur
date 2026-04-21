@@ -98,6 +98,21 @@ fi
 if [[ ! -v "_offline" ]]; then
   _offline="false"
 fi
+if [[ ! -v "_archive_format" ]]; then
+  if [[ "${_git}" == "true" ]]; then
+    if [[ "${_evmfs}" == "true" ]]; then
+      _archive_format="bundle"
+    elif [[ "${_evmfs}" == "false" ]]; then
+      _archive_format="git"
+    fi
+  elif [[ "${_git}" == "false" ]]; then
+    if [[ "${_git_service}" == "github" ]]; then
+      _archive_format="zip"
+    elif [[ "${_git_service}" == "gitlab" ]]; then
+      _archive_format="tar.gz"
+    fi
+  fi
+fi
 _module="ipc"
 pkgbase="${_pkg}-sq"
 pkgname=(
@@ -112,7 +127,7 @@ _commit="fd270aeedfffc7d03f8bd61bcf0842a831ec7ded"
 # refs/tags/v0.34.1
 _sq_commit="696bf3a677fe8a34ed02c6e44afa1cc3c1e273df"
 # refs/tags/v0.34.0
-pkgrel=3
+pkgrel=4
 pkgdesc='Command-line frontends for Sequoia'
 url="https://${_pkg}-pgp.org"
 arch=(
