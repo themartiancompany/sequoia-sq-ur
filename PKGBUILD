@@ -32,6 +32,42 @@
 #   David Runge
 #     <dvzrv@archlinux.org>
 
+_os="$(
+  uname \
+    -o)"
+if [[ "${_os}" == "Android" ]]; then
+  _cargo="false"
+  _libc="ndk-sysroot"
+  _compiler="clang"
+  _cc="clang"
+  _libcompiler="llvm-libs"
+  _rust="true"
+elif [[ "${_os}" == "GNU/Linux" ]]; then
+  _cargo="true"
+  _libc="glibc"
+  _cc="clang"
+  _compiler="gcc"
+  _libcompiler="libgcc"
+  _rust="true"
+elif [[ "${_os}" == "Msys" ]]; then
+  _libc="msys2-w32api-runtime"
+  _libc_headers="msys2-w32api-headers"
+  _compiler="gcc"
+  _libcompiler="gcc-libs"
+  _rust="false"
+  _sh="sh"
+else
+  _msg=(
+    "Unknown os '${_os}'."
+  )
+  msg \
+    "${_msg[*]}"
+  _libc="msys2-w32api-runtime"
+  _libc_headers="msys2-w32api-headers"
+  _compiler="gcc"
+  _libcompiler="gcc-libs"
+  _sh="sh"
+fi
 _evmfs_available="$(
   command \
     -v \
@@ -44,33 +80,29 @@ if [[ ! -v "_evmfs" ]]; then
     _evmfs="false"
   fi
 fi
-_os="$(
-  uname \
-    -o)"
+_proj=sequoia
+_pkg=${_proj}
+if [[ ! -v "_ns" ]]; then
+  # _ns="themartiancompany"
+  _ns="${_pkg}-pgp"
+fi
 if [[ ! -v "_git" ]]; then
   _git="false"
+fi
+if [[ ! -v "_git_service" ]]; then
+  _git_service="gitlab"
+  if [[ "${_ns}" == "themartiancompany" ]]; then
+    _git_service="github"
+  fi
 fi
 if [[ ! -v "_offline" ]]; then
   _offline="false"
 fi
-_os="$( \
-  uname \
-    -o)"
-if [[ "${_os}" == "Android" ]]; then
-  _cargo="false"
-  _cc="clang"
-  _libc="ndk-sysroot"
-  _rust="true"
-elif [[ "${_os}" == "GNU/Linux" ]]; then
-  _cargo="true"
-  _cc="clang"
-  _libc="glibc" 
-  _rust="false"
-fi
-_proj="sequoia"
-_pkg="${_proj}"
 _module="ipc"
-pkgname="${_pkg}-sq"
+pkgbase="${_pkg}-sq"
+pkgname=(
+  "${pkgbase}"
+)
 pkgver=1.3.1
 _ipc_pkgver="0.36.0"
 _sq_pkgver="${pkgver}"
@@ -101,7 +133,7 @@ replaces=(
 depends=(
   'bzip2'
   'libbz2.so'
-  'gcc-libs'
+  "${_libcompiler}"
   "${_libc}"
   'gmp'
   'nettle'
@@ -112,7 +144,9 @@ depends=(
 )
 makedepends=(
   'capnproto'
-  "${_cc}"
+  "${_compiler}"
+  "${_libc}"
+  "${_libcompiler}"
 )
 if [[ "${_cargo}" == "true" ]]; then
   makedepends+=(
@@ -124,10 +158,26 @@ if [[ "${_rust}" == "true" ]]; then
     "rust"
   )
 fi
+if [[ "${_os}" == "Msys" ]]; then
+  makedepends+=(
+    "${_libc_headers}"
+    "windows-default-manifest"
+  )
+fi
+if [[ "${_git}" == "true" ]]; then
+  makedepends+=(
+    "git" 
+  )
+fi
+if [[ "${_evmfs}" == "true" ]]; then
+  makedepends+=(
+    "evmfs" 
+  )
+fi
 options=(
   '!lto'
 )
-_http="https://gitlab.com"
+_http="https://${_git_service}.com"
 _ns="${_pkg}-pgp"
 _url="${_http}/${_ns}/${_pkg}"
 _sq_url="${_http}/${_ns}/${pkgname}"
@@ -175,7 +225,7 @@ if [[ "${_git}" == true ]]; then
       "${_tarname}"
     git \
       describe \
-        --tags | \
+        --tags |
       sed \
         's/\([^-]*-g\)/r\1/;s/-/./g;s/v//g'
   }
@@ -184,13 +234,13 @@ fi
 _usr_get() {
   local \
     _bin
-  _bin="$( \
+  _bin="$(
     dirname \
       "$(command \
            -v \
            "clang" \
            "cxx" \
-           "g++" | \
+           "g++" |
            head \
 	     -n \
 	       1)")"
@@ -211,14 +261,14 @@ _prepare() {
     _arch \
     _usr
   _rust_native_target=""
-  _usr="$( \
+  _usr="$(
     _usr_get)"
   _msg=(
     "Detected 'usr' directory '${_usr}'."
   )
   msg \
     "${_msg[*]}"
-  _arch="$( \
+  _arch="$(
     uname \
       -m)"
   _msg=(
@@ -227,10 +277,10 @@ _prepare() {
   )
   msg \
     "${_msg[*]}"
-  _rust_android_targets+=( $( \
+  _rust_android_targets+=( $(
     rustc \
       --print \
-        "target-list" | \
+        "target-list" |
           grep \
             "android")
   )
@@ -240,10 +290,10 @@ _prepare() {
   )
   msg \
     "${_msg[*]}"
-  _rust_arch_targets+=( $( \
+  _rust_arch_targets+=( $(
     rustc \
       --print \
-        "target-list" | \
+        "target-list" |
           grep \
             "${_arch}" || \
       true)
@@ -264,35 +314,35 @@ _prepare() {
     find \
       "${_usr}/lib/rustlib" \
       -type \
-        "d" # | \
+        "d" # |
         # grep \
-        #   "${_usr}/lib/rustlib/${_arch}-" | \
+        #   "${_usr}/lib/rustlib/${_arch}-" |
         #   head \
         #     -n \
         #       1)")"
     _rust_target_native="armv7-linux-androideabi"
   elif [[ "${_arch}" == "x86_64" ]]; then
-    _rust_target_native="$( \
+    _rust_target_native="$(
       basename \
         "$(find \
              "${_usr}/lib/rustlib" \
              -type \
-               "d" | \
+               "d" |
              head \
                -n \
-                 2 | \
+                 2 |
                tail \
                  -n \
                    1)")"
   elif [[ "${_arch}" == "i686" ]]; then
-    _rust_target_native="$( \
+    _rust_target_native="$(
       basename \
         "$(find \
              "${_usr}/lib/rustlib" \
              -type \
-               "d" | \
+               "d" |
                grep \
-                 "${_usr}/lib/rustlib/${_arch}-" | \
+                 "${_usr}/lib/rustlib/${_arch}-" |
                  head \
                    -n \
                      1)")"
@@ -326,8 +376,7 @@ _prepare() {
       _target="${CARCH}-unknown-linux-gnu"
     fi
   fi
-  _pwd="$( \
-    pwd)"
+  _pwd="${PWD}"
   cd \
     "${_dir}"
   export \
@@ -359,14 +408,13 @@ _build() {
     _cargo_opts=() \
     _pwd \
     _cc
-  _cc="$( \
+  _cc="$(
     command \
       -v \
       "cc")"
   msg \
     "Building ${_dir}."
-  _pwd="$( \
-    pwd)"
+  _pwd="${PWD}"
   shift \
     1
   _cargo_opts=(
@@ -425,9 +473,9 @@ package() {
     _os \
     _pkgdir_usr \
     _usr
-  _usr="$( \
+  _usr="$(
     _usr_get)"
-  _os="$( \
+  _os="$(
     uname \
       -o)"
   if [[ "${_os}" == "Android" ]]; then
