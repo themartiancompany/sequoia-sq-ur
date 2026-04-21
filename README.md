@@ -1,7 +1,7 @@
 [comment]: <> (SPDX-License-Identifier: AGPL-3.0)
 
 [comment]: <> (-------------------------------------------------------------)
-[comment]: <> (Copyright © 2024, 2025  Pellegrino Prevete)
+[comment]: <> (Copyright © 2024, 2025, 2026  Pellegrino Prevete)
 [comment]: <> (All rights reserved)
 [comment]: <> (-------------------------------------------------------------)
 
@@ -25,6 +25,8 @@ universal recipe for
 [user repo](
   https://github.com/themartiancompany/ur).
 
-[PKGBUILD](PKGBUILD)
+[PKGBUILD](
+  PKGBUILD)
 
-[LICENSE](COPYING)
+[LICENSE](
+  COPYING)

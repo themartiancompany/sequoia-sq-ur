@@ -1,7 +1,7 @@
 # SPDX-License-Identifier: AGPL-3.0
 
 #    ----------------------------------------------------------------------
-#    Copyright © 2023, 2024, 2025  Pellegrino Prevete
+#    Copyright © 2023, 2024, 2025, 2026  Pellegrino Prevete
 #
 #    All rights reserved
 #    ----------------------------------------------------------------------
@@ -80,7 +80,7 @@ _commit="fd270aeedfffc7d03f8bd61bcf0842a831ec7ded"
 # refs/tags/v0.34.1
 _sq_commit="696bf3a677fe8a34ed02c6e44afa1cc3c1e273df"
 # refs/tags/v0.34.0
-pkgrel=2
+pkgrel=3
 pkgdesc='Command-line frontends for Sequoia'
 url="https://${_pkg}-pgp.org"
 arch=(
